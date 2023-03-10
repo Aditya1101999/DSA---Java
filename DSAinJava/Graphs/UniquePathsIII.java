@@ -1,4 +1,4 @@
-package Graphs;
+package DSAinJava.Graphs;
 
 public class UniquePathsIII {
     public static int uniquePathsIII(int[][] grid) {
@@ -36,7 +36,6 @@ public class UniquePathsIII {
                 dfs(grid,x,y+1,count)+
                 dfs(grid,x,y-1,count);
         grid[x][y]=0;//backtrack
-        count++;
 
         return totalPaths;
     }

@@ -1,4 +1,4 @@
-package Graphs;
+package DSAinJava.Graphs;
 import java.util.*;
 public class RottenOranges {
     static class Pair {

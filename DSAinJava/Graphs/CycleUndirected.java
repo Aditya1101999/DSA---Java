@@ -1,4 +1,4 @@
-package Graphs;
+package DSAinJava.Graphs;
 import java.util.*;
 public class CycleUndirected {
     static class Pair{
@@ -54,7 +54,7 @@ public class CycleUndirected {
             if(!visited[el]){
                 return checkForCycleDFS(el,node,adj,visited);
             }
-            else if(el!=parent){//not visited and element is not parent
+            else if(el!=parent){//visited and element is not parent
                 return true;
             }
         }
