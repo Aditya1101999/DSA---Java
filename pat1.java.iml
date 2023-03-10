@@ -2,8 +2,80 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/DSAinJava/Arraylist">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Arraylist" isTestSource="false" packagePrefix="Arraylist" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Backtracking">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Backtracking" isTestSource="false" packagePrefix="Backtracking" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/BinaryTree">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/BinaryTree" isTestSource="false" packagePrefix="BinaryTree" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/BitManipulation">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/BitManipulation" isTestSource="false" packagePrefix="BitManipulation" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/DivideAndConq">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/DivideAndConq" isTestSource="false" packagePrefix="DivideAndConq" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/DynProg">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/DynProg" isTestSource="false" packagePrefix="DynProg" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Graphs">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Graphs" isTestSource="false" packagePrefix="Graphs" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Greedy">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Greedy" isTestSource="false" packagePrefix="Greedy" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Hashing">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Hashing" isTestSource="false" packagePrefix="Hashing" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Heaps">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Heaps" isTestSource="false" packagePrefix="Heaps" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Oops">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Oops" isTestSource="false" packagePrefix="Oops" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Queues">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Queues" isTestSource="false" packagePrefix="Queues" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Recursion">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Recursion" isTestSource="false" packagePrefix="Recursion" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Stack">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Stack" isTestSource="false" packagePrefix="Stack" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Strings">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Strings" isTestSource="false" packagePrefix="Strings" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Tries">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Tries" isTestSource="false" packagePrefix="Tries" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/Two_DArrays">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/Two_DArrays" isTestSource="false" packagePrefix="Two_DArrays" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/advancedPatterns">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/advancedPatterns" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/arrays">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/arrays" isTestSource="false" packagePrefix="arrays" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/basics">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/basics" isTestSource="false" packagePrefix="basics" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/functions">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/functions" isTestSource="false" packagePrefix="functions" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/linkList">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/linkList" isTestSource="false" packagePrefix="linkList" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/loops">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/loops" isTestSource="false" packagePrefix="loops" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/patterns">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/patterns" isTestSource="false" packagePrefix="patterns" />
+    </content>
+    <content url="file://$MODULE_DIR$/DSAinJava/sorting">
+      <sourceFolder url="file://$MODULE_DIR$/DSAinJava/sorting" isTestSource="false" packagePrefix="sorting" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
