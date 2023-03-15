@@ -18,6 +18,22 @@ public class Subsets {
             curr.remove(curr.size()-1);
         }
     }
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>>ans=new ArrayList<>();
+        Arrays.sort(nums);
+        findSubsets2(0,nums,ans,new ArrayList<>());
+        return ans;
+    }
+    private void findSubsets2(int index,int[] nums,List<List<Integer>>ans,ArrayList<Integer>curr){
+        ans.add(new ArrayList<>(curr));
+        for(int i=index;i<nums.length;i++){
+            if(i>index && nums[i]==nums[i-1]) continue;
+
+            curr.add(nums[i]);
+            findSubsets2(i+1,nums,ans,curr);
+            curr.remove(curr.size()-1);
+        }
+    }
     public static ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int N){
         ArrayList<Integer>ans=new ArrayList<>();
         findSubsetsSum(0,0,arr,N,ans);
