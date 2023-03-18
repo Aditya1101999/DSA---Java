@@ -1,4 +1,4 @@
-package BinaryTree;
+package DSAinJava.BinaryTree;
 import java.util.*;
 public class SearchTree {
     static class Node{
