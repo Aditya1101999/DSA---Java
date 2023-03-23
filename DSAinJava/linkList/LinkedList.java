@@ -1,4 +1,4 @@
-package linkList;
+package DSAinJava.linkList;
 public class LinkedList {
     public static class Node{
         int data;
@@ -18,6 +18,30 @@ public class LinkedList {
     //making non-static methods since we won't call
     //functions directly,call using LL
     //creating some non-static methods for operations
+    Node insertAtBeginning(Node head, int x)
+    {
+        Node node=new Node(x);
+        if(head==null) return node;
+        node.next=head;
+        return node;
+        // head=node;
+        // return head;
+    }
+
+    //Function to insert a node at the end of the linked list.
+    Node insertAtEnd(Node head, int x)
+    {
+        Node node=new Node(x);
+        if(head==null){
+            return node;
+        }
+        Node curr=head;
+        while(curr.next!=null){
+            curr=curr.next;
+        }
+        curr.next=node;
+        return head;
+    }
     public void addFirst(int data){
         //create new node
         Node newNode=new Node(data);
@@ -300,6 +324,13 @@ public class LinkedList {
             }
         }
         return false;
+//        int count=1;->to count no. of nodes in cycle
+//        if(slo!=fas) return 0;
+//        while(slo.next!=fas){
+//            slo=slo.next;
+//            count++;
+//        }
+//        return count
     }
     public static void removeCycle(){
         //detect cycle
@@ -318,16 +349,31 @@ public class LinkedList {
         if(!cycle){
             return;
         }
-        //find cycle point
-        slo=head;
-        Node prev=null;
-        while(slo!=fas){
-            prev=fas;
-            slo=slo.next;
-            fas=fas.next;
+//        //find cycle point
+//        slo=head;
+//        Node prev=null;
+//        while(slo!=fas){
+//            prev=fas;
+//            slo=slo.next;
+//            fas=fas.next;
+//        }
+//        //remove cycle
+//        prev.next=null;//last node
+        if(cycle){
+            slo=head;
+            if(slo!=fas){
+                while(slo.next!=fas.next){
+                    slo=slo.next;
+                    fas=fas.next;
+                }
+            }
+            else{//if slow and fast equal
+                while(fas.next!=slo){
+                    fas=fas.next;
+                }
+            }
+            fas.next=null;
         }
-        //remove cycle
-        prev.next=null;//last node
     }
     public Node detectCycle(Node head) {
         if(head==null||head.next==null){
@@ -386,7 +432,7 @@ public class LinkedList {
     }
     private Node getMid(Node head){
         Node slow=head;
-        Node fast=head.next;
+        Node fast=head;
         while(fast!=null &&fast.next!=null){
             //odd and even cases respectively
             slow=slow.next;//+1
