@@ -15,7 +15,7 @@ public class MinJumps {//tell whether jumps possible
         return false;
     }
     //tells no. of jumps
-    public static int tab(int[] arr){
+    public static int tab(int[] arr){//brute
         int n= arr.length;
         int[] dp=new int[n];
         Arrays.fill(dp,-1);
@@ -34,6 +34,22 @@ public class MinJumps {//tell whether jumps possible
             }
         }
         return dp[0];
+    }
+    public int jump(int[] nums) {//optimal
+        int jumps=0;
+        int maxReachIndex=0;
+        int divider=0;
+        for(int i=0;i<nums.length;i++){
+            if(i>divider){
+                jumps++;
+                divider=maxReachIndex;
+            }
+            maxReachIndex=Math.max(maxReachIndex,i+nums[i]);
+            if (maxReachIndex <= i) {
+                return -1; // can't reach last index
+            }
+        }
+        return jumps;
     }
     public static void main(String[] args){
         int[] nums={2,3,1,1,4};
