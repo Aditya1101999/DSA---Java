@@ -32,6 +32,35 @@ public class threesum{
         return res;
 
     }
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int closestSum=0;
+        int minDiff=Integer.MAX_VALUE;
+        for(int i=0;i<nums.length-2;i++){//if last two elements can act as triplets with i
+            //two-pointer
+            int low=i+1;
+            int high=nums.length-1;
+            while(low<high){
+                int sum=nums[i]+nums[low]+nums[high];
+                int currDiff=Math.abs(target-sum);
+                if(sum==target){
+                    return sum;
+                }
+                else if(sum<target){
+                    low++;
+                }
+                else{
+                    high--;
+                }
+                if(currDiff<minDiff){
+                    minDiff=currDiff;
+                    closestSum=sum;
+                }
+            }
+
+        }
+        return closestSum;
+    }
     public static void main(String args[]){
         int[] nums={0,-1,2,-3,1};
         List<List<Integer>> res=threeSum(nums);
