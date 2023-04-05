@@ -77,6 +77,24 @@ public class BasicOperations {
                 }
             }
         }
+        public List<List<Integer>> levelOrderLeetcode(Node root) {
+            List<List<Integer>> res=new ArrayList<>();
+            if(root==null) return res;
+            Queue<Node>q=new LinkedList<>();
+            q.add(root);
+            while(!q.isEmpty()){
+                int size=q.size();
+                List<Integer>temp=new ArrayList<>();
+                for(int i=0;i<size;i++){
+                    Node curr=q.remove();
+                    if(curr.left!=null) q.add(curr.left);
+                    if(curr.right!=null) q.add(curr.right);
+                    temp.add(curr.data);
+                }
+                res.add(temp);
+            }
+            return res;
+        }
         public static int height(Node root) {
             if (root == null) {
                 return 0;
