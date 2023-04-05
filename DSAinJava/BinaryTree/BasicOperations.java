@@ -95,6 +95,25 @@ public class BasicOperations {
             }
             return res;
         }
+        public List<List<Integer>> levelOrderBottom(Node root) {
+            List<List<Integer>> res=new ArrayList<>();
+            if(root==null) return res;
+            Queue<Node>q=new LinkedList<>();
+            q.add(root);
+            while(!q.isEmpty()){
+                int size=q.size();
+                List<Integer>temp=new ArrayList<>();
+                for(int i=0;i<size;i++){
+                    Node curr=q.remove();
+                    if(curr.left!=null) q.add(curr.left);
+                    if(curr.right!=null) q.add(curr.right);
+                    temp.add(curr.data);
+                }
+                //the temp object will be the first element in the res list, and all the other elements will be shifted one position to the right
+                res.add(0,temp);
+            }
+            return res;
+        }
         public static int height(Node root) {
             if (root == null) {
                 return 0;
