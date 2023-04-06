@@ -112,6 +112,50 @@ public class SearchTree {
         //removing root at last index(backtracking)
         path.remove(path.size()-1);
     }
+    // Encodes a tree to a single string.
+    public String serialize(Node root) {
+        if(root==null){
+            return "";
+        }
+        Queue<Node>q=new LinkedList<>();
+        StringBuilder res=new StringBuilder();
+        q.add(root);
+        while(!q.isEmpty()){
+            Node curr=q.remove();
+            if(curr==null){
+                res.append("n ");
+                continue;
+            }
+            res.append(curr.data+" ");
+            q.add(curr.left);
+            q.add(curr.right);
+        }
+        return res.toString();
+    }
+
+
+    // Decodes your encoded data to tree.
+    public Node deserialize(String data) {
+        if(data=="") return null;
+        Queue<Node>q=new LinkedList<>();
+        String[] values=data.split(" ");
+        Node root=new Node(Integer.parseInt(values[0]));
+        q.add(root);
+        for(int i=1;i<values.length;i++){
+            Node curr=q.remove();
+            if(!values[i].equals("n")){//left
+                Node left=new Node(Integer.parseInt(values[i]));
+                curr.left=left;
+                q.add(left);
+            }
+            if(!values[++i].equals("n")){//right
+                Node right=new Node(Integer.parseInt(values[i]));
+                curr.right=right;
+                q.add(right);
+            }
+        }
+        return root;
+    }
     public static boolean isValidBst(Node root,Node min,Node max){
         if(root==null){
             return true;
