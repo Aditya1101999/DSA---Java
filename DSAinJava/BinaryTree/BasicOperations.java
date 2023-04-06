@@ -114,6 +114,20 @@ public class BasicOperations {
             }
             return res;
         }
+        public int findBottomLeftValue(Node root) {
+            Queue<Node>q=new LinkedList<>();
+            q.add(root);
+            while(!q.isEmpty()){
+                root=q.remove();
+                if(root.right!=null){
+                    q.add(root.right);
+                }
+                if(root.left!=null){
+                    q.add(root.left);
+                }
+            }
+            return root.data;
+        }
         public static int height(Node root) {
             if (root == null) {
                 return 0;
