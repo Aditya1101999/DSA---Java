@@ -1,55 +1,34 @@
 package Stack;
 import java.util.*;
 public class SimplifyPath {
-    public static String simplify(String str){
-        Stack <String> s=new Stack<>();
-        String res="";
-        res+="/";
-        for(int i=0;i<str.length();i++){
-            String dir="";
-            while(i<str.length()&&str.charAt(i)=='/'){
-                i++;//skip
-            }
-            while(i<str.length()&&str.charAt(i)!='/') {
-                //adding the character to directory
-                dir += str.charAt(i);
-                i++;
-
-                if (dir.equals("..")) {
-                    //parent directory
-                    if (!s.isEmpty()) {
-                        //current directory popped
-                        s.pop();
-                    }
-                } else if (dir.equals(".")) {
-                    //current directory
-                    continue;
-                    //skip '.' and continue with next iteration
-                } else if (dir.length() != 0) {
-                    //pushed directory into stack
-                    s.push(dir);
-                }
-            }
-            Stack<String> s1=new Stack<>();
-            while(!s.isEmpty()){
-                //copying elements in another stack
-                //with right order
-                s1.push(s.pop());
-            }
-            while(!s1.empty()){
-                if(s1.size()!=1){
-                    res+=(s1.pop()+"/");
-                }
-                else{//only / in result
-                    res+=s1.pop();
-                }
+    public static String simplifyPath(String path) {
+        String[] parts = path.split("/");
+        Stack<String> stack = new Stack<>();
+        for (String part : parts) {
+            if (part.equals(".") || part.isEmpty()) continue;
+                // skip current directory and empty parts
+            else if (part.equals("..")) {
+                // go up one level
+                if (!stack.isEmpty()) stack.pop();
+            } else {
+                // add directory name to stack
+                stack.push(part);
             }
         }
-        return res;
+        // build canonical path from stack
+        StringBuilder sb = new StringBuilder("/");
+        while (!stack.isEmpty()) {//index 1->most recently added directory name appears first in the path
+            sb.insert(1, stack.pop() + "/");// sb = "/baz/bar/foo/"
+        }
+        // remove trailing slash if not root directory
+        if (sb.length() > 1 && sb.charAt(sb.length()-1) == '/') {
+            sb.setLength(sb.length()-1);
+        }
+        return sb.toString();
     }
     public static void main(String[] args){
         String str = new String("/a/..");
-        String res = simplify(str);
+        String res = simplifyPath(str);
         System.out.println(res);
     }
 }
