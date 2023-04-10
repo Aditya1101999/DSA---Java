@@ -41,4 +41,37 @@ public class EventualSafeStates {
         pathVisited[node]=false;
         return false;
     }
+    public List<Integer> eventualSafeNodesBFS(int[][] graph) {
+        int n=graph.length;
+        ArrayList<ArrayList<Integer>>adj=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            adj.add(new ArrayList<>());
+        }
+        for (int i = 0; i < graph.length; i++) {//reversed graph
+            for (int j = 0; j < graph[i].length; j++) {
+                adj.get(graph[i][j]).add(i);
+            }
+        }
+        int[] inDegree=new int[n];
+        for(int i=0;i<n;i++){
+            for(int node: adj.get(i)){
+                inDegree[node]++;//increasing freq
+            }
+        }
+        Queue<Integer>q=new LinkedList<>();
+        for(int i=0;i<n;i++){
+            if(inDegree[i]==0) q.add(i);
+        }
+        List<Integer>ans=new ArrayList<>();
+        while(!q.isEmpty()){
+            int node=q.remove();
+            ans.add(node);
+            for(int i:adj.get(node)){
+                inDegree[i]--;
+                if(inDegree[i]==0) q.add(i);
+            }
+        }
+        Collections.sort(ans);
+        return ans;
+    }
 }
