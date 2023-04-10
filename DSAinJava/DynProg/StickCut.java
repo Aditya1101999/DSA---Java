@@ -14,6 +14,6 @@ public class StickCut {
                     dp[i][j] = Math.min(dp[i][j] == 0 ? Integer.MAX_VALUE : dp[i][j],
                             c.get(j) - c.get(i) + dp[i][k] + dp[k][j]);
             }
-        return dp[0][c.size() - 1];
+        return dp[0][c.size() - 1];//stick cutting cost from 0 to c.size()-1
     }
 }
