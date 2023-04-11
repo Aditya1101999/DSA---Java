@@ -41,7 +41,6 @@ public class BasicOperations {
             System.out.print(root.data + " ");
             inorder(root.right);
         }
-
         public static void postorder(Node root) {
             if (root == null) {
                 return;
@@ -49,6 +48,41 @@ public class BasicOperations {
             postorder(root.left);
             postorder(root.right);
             System.out.print(root.data + " ");
+        }
+        class Pair{
+            Node node;
+            int num;
+            public Pair(Node node,int num){
+                this.node=node;
+                this.num=num;
+            }
+        }
+        public void preInPostTraversal(Node root){
+            if(root==null) return;
+            Stack<Pair>st=new Stack<>();
+            List<Integer>pre=new ArrayList<>();
+            List<Integer>in=new ArrayList<>();
+            List<Integer>post=new ArrayList<>();
+            st.push(new Pair(root,1));
+            while(!st.isEmpty()){
+                Pair curr=st.pop();
+                if(curr.num==1){//preOrder
+                    pre.add(curr.node.data);
+                    curr.num++;
+                    st.push(curr);
+                    if(curr.node.left!=null) st.push(new Pair(curr.node.left,1));
+                }
+                else if(curr.num==2){//inorder
+                    in.add(curr.node.data);
+                    curr.num++;
+                    st.push(curr);
+                    if(curr.node.right!=null) st.push(new Pair(curr.node.right,1));
+                }
+                else{//postorder
+                    post.add(curr.node.data);
+                }
+            }
+
         }
         public static void levelOrder(Node root) {
             if (root == null) {
