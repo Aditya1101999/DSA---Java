@@ -148,6 +148,28 @@ public class BasicOperations {
             }
             return res;
         }
+        public List<List<Integer>> zigzagLevelOrder(Node root) {
+            List<List<Integer>> res=new ArrayList<>();
+            if(root==null) return res;
+            Queue<Node>q=new LinkedList<>();
+            q.add(root);
+            boolean flag=true;
+            while(!q.isEmpty()){
+                int size=q.size();
+                List<Integer>temp=new ArrayList<>();
+                for(int i=0;i<size;i++){
+                    Node curr=q.remove();
+                    if(curr.left!=null) q.add(curr.left);
+                    if(curr.right!=null) q.add(curr.right);
+
+                    if(flag)temp.add(curr.data);
+                    else temp.add(0,curr.data);//push reversing elements
+                }
+                flag=!flag;
+                res.add(temp);
+            }
+            return res;
+        }
         public int findBottomLeftValue(Node root) {
             Queue<Node>q=new LinkedList<>();
             q.add(root);
@@ -170,6 +192,19 @@ public class BasicOperations {
             int rh = height(root.right);
             int h = Math.max(lh, rh) + 1;
             return h;
+        }
+        public boolean isBalanced(Node root) {
+            return balancedheightCheck(root)!=-1;
+        }
+        public int balancedheightCheck(Node root) {
+            if (root == null) {
+                return 0;
+            }
+            int lh = balancedheightCheck(root.left);
+            int rh = balancedheightCheck(root.right);
+            if(lh==-1||rh==-1) return -1;
+            if(Math.abs(rh-lh)>1) return -1;
+            return Math.max(lh, rh) + 1;
         }
         public static int nodeCount(Node root) {
             if (root == null) {
