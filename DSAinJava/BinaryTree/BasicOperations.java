@@ -387,6 +387,18 @@ public class BasicOperations {
             }
             System.out.println();
         }
+        public List<Integer> rightSideView(Node root) {
+            List<Integer>ans=new ArrayList<>();
+            rightView(root,ans,0);
+            return ans;
+        }
+        private void rightView(Node root,List<Integer>ans,int level){
+            if(root==null) return;
+            if(level==ans.size()) ans.add(root.data);//add the node encountered first in the level
+            //reversed inorder traversal;call root.left first for left view
+            rightView(root.right,ans,level+1);
+            rightView(root.left,ans,level+1);
+        }
         public static void KthLevel(Node root, int level, int k) {
             if (root == null) {
                 return;
