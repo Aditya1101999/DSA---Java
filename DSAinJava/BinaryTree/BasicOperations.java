@@ -170,6 +170,50 @@ public class BasicOperations {
             }
             return res;
         }
+        private boolean isLeaf(Node node){
+            return (node.left==null) && (node.right==null);
+        }
+        private ArrayList<Integer> boundary(Node node) {
+            ArrayList<Integer>ans=new ArrayList<>();
+            if(!isLeaf(node)){
+                ans.add(node.data);
+            }
+            leftBoundary(ans,node);
+            leafNodes(ans,node);
+            rightBoundary(ans,node);
+            return ans;
+
+        }
+        private void leftBoundary(ArrayList<Integer>ans,Node root){
+            Node curr=root.left;
+            while(curr!=null){
+                if(!isLeaf(curr)) ans.add(curr.data);
+                if(curr.left!=null) curr=curr.left;
+                else curr=curr.right;
+            }
+
+        }
+        private void leafNodes(ArrayList<Integer>ans,Node root){//inorder
+            if(isLeaf(root)){
+                ans.add(root.data);
+                return;
+            }
+            if(root.left!=null)leafNodes(ans,root.left);
+            if(root.right!=null)leafNodes(ans,root.right);
+        }
+        private void rightBoundary(ArrayList<Integer>ans,Node root){
+            Node curr=root.right;
+            ArrayList<Integer>temp=new ArrayList<>();
+            while(curr!=null){
+                if(!isLeaf(curr)) temp.add(curr.data);
+                if(curr.right!=null) curr=curr.right;
+                else curr=curr.left;
+            }
+            for(int i=temp.size()-1;i>=0;i--){
+                ans.add(temp.get(i));
+            }
+
+        }
         public int findBottomLeftValue(Node root) {
             Queue<Node>q=new LinkedList<>();
             q.add(root);
