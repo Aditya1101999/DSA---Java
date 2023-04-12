@@ -535,6 +535,18 @@ public class BasicOperations {
             root.right=left;
             return root;
         }
+        public boolean isSymmetric(Node root) {
+            if(root==null) return true;
+            return isSymmetricHelper(root.left,root.right);
+        }
+        private boolean isSymmetricHelper(Node left,Node right){
+            if(left==null||right==null){
+                return left==right;
+            }
+            if(left.data!=right.data) return false;
+            //checking for mirror nodes
+            return isSymmetricHelper(left.left,right.right) && isSymmetricHelper(left.right,right.left);
+        }
         public static Node delete(Node root,int x){
             if(root==null){
                 return null;
