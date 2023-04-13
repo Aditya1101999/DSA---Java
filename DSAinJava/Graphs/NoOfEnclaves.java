@@ -1,6 +1,6 @@
 package DSAinJava.Graphs;
 import java.util.*;
-public class NoOfGraphs {
+public class NoOfEnclaves {
     class Pair{
         int row;
         int col;
