@@ -198,7 +198,8 @@ public class SearchTree {
             maxBST=Math.max(maxBST,size);
             return new Info(true,size,max,min);
         }
-        return new Info(false,size,max,min);
+        //maximum size of a valid BST from both sides
+        return new Info(false,Math.max(leftInfo.max, rightInfo.max),Integer.MAX_VALUE,Integer.MIN_VALUE);
     }
     static class Info1{
         int min;
