@@ -51,10 +51,10 @@ public class BasicOperations {
         }
         class Pair{
             Node node;
-            int num;
-            public Pair(Node node,int num){
+            int index;
+            public Pair(Node node,int index){
                 this.node=node;
-                this.num=num;
+                this.index=index;
             }
         }
         public void preInPostTraversal(Node root){
@@ -66,15 +66,15 @@ public class BasicOperations {
             st.push(new Pair(root,1));
             while(!st.isEmpty()){
                 Pair curr=st.pop();
-                if(curr.num==1){//preOrder
+                if(curr.index==1){//preOrder
                     pre.add(curr.node.data);
-                    curr.num++;
+                    curr.index++;
                     st.push(curr);
                     if(curr.node.left!=null) st.push(new Pair(curr.node.left,1));
                 }
-                else if(curr.num==2){//inorder
+                else if(curr.index==2){//inorder
                     in.add(curr.node.data);
-                    curr.num++;
+                    curr.index++;
                     st.push(curr);
                     if(curr.node.right!=null) st.push(new Pair(curr.node.right,1));
                 }
@@ -237,6 +237,35 @@ public class BasicOperations {
             int h = Math.max(lh, rh) + 1;
             return h;
         }
+    public int widthOfBinaryTree(Node root) {
+        if(root==null) return 0;
+        int ans=0;
+        Queue<Pair>q=new LinkedList<>();
+        q.add(new Pair(root,0));
+        while(!q.isEmpty()){
+            int size=q.size();
+            int minIndex=q.peek().index;
+            int first=0;
+            int last=0;
+            for(int i=0;i<size;i++){
+                int currIndex=q.peek().index-minIndex;
+                Node curr=q.peek().node;
+                q.remove();
+                if(i==0) first=currIndex;
+                if(i==size-1) last=currIndex;
+                //indexing like segment trees
+                if(curr.left!=null){
+                    q.add(new Pair(curr.left,2*currIndex+1));
+                }
+                if(curr.right!=null){
+                    q.add(new Pair(curr.right,2*currIndex+2));
+                }
+
+            }
+            ans=Math.max(ans,last-first+1);
+        }
+        return ans;
+    }
         public boolean isBalanced(Node root) {
             return balancedheightCheck(root)!=-1;
         }
@@ -294,8 +323,6 @@ public class BasicOperations {
             }
             return Math.min(left,right)+1;
         }
-
-
         //approach 2
          static class Info {
             int diam;
