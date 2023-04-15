@@ -266,7 +266,27 @@ public class BasicOperations {
         }
         return ans;
     }
-        public boolean isBalanced(Node root) {
+    public void childrenSumProperty(Node root){
+            if(root==null) return;
+            int child=0;
+            if(root.left!=null) child+=root.left.data;
+            if(root.right!=null) child+=root.right.data;
+
+            if(child>=root.data) root.data=child;
+            else{
+                if(root.left!=null) root.left.data= root.data;
+                if(root.right!=null) root.right.data=root.data;
+            }
+            childrenSumProperty(root.left);
+            childrenSumProperty(root.right);
+
+            int sum=0;
+            if(root.left!=null) sum+=root.left.data;
+            if(root.right!=null) sum+=root.right.data;
+            if(root.left!=null||root.right!=null)//non-leaf node
+                root.data=sum;
+    }
+    public boolean isBalanced(Node root) {
             return balancedheightCheck(root)!=-1;
         }
         public int balancedheightCheck(Node root) {

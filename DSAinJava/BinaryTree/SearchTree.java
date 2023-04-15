@@ -93,6 +93,20 @@ public class SearchTree {
             inRange(root.right,k1,k2);
         }
     }
+    public int findCeil(Node root, int key) {//value equal or just greater than key in tree
+        int ceil=-1;
+        while(root!=null){
+            if(key==root.data){
+                return root.data;
+            }
+            if(key>root.data) root=root.right;
+            else{
+                ceil=root.data;
+                root=root.left;
+            }
+        }
+        return ceil;
+    }
     public static void printPath(ArrayList<Integer>path){
         for(int i=0;i< path.size();i++){
             System.out.print(path.get(i)+"->");
