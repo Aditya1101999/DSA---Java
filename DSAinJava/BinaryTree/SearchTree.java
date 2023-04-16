@@ -107,6 +107,20 @@ public class SearchTree {
         }
         return ceil;
     }
+    public int floor(Node root, int key) {//value equal or just smaller than key in tree
+        int floor=-1;
+        while(root!=null){
+            if(key==root.data){
+                return root.data;
+            }
+            if(key<root.data) root=root.left;
+            else{
+                floor=root.data;
+                root=root.right;
+            }
+        }
+        return floor;
+    }
     public static void printPath(ArrayList<Integer>path){
         for(int i=0;i< path.size();i++){
             System.out.print(path.get(i)+"->");
