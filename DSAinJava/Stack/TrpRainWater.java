@@ -1,4 +1,4 @@
-package Stack;
+package DSAinJava.Stack;
 import java.util.*;
 public class TrpRainWater {
     public static int maxWater(int[] height){
@@ -8,8 +8,7 @@ public class TrpRainWater {
             for(int i=0;i<n;i++) {
                 while(!stack.isEmpty()
                     && height[stack.peek()]<=height[i]){
-                    int cur=stack.peek();
-                    stack.pop();
+                    int cur=stack.pop();
                     if(stack.isEmpty()){//no solution
                         break;
                     }
