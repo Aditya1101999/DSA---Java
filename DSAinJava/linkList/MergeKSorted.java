@@ -40,6 +40,24 @@ public class MergeKSorted {
         }else
             return null;
     }
+    public Node sortList(Node head) {
+        if(head==null||head.next==null) return head;
+
+        Node slow=head;
+        Node fast=head.next;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        Node left=head;
+        Node right=slow.next;
+        slow.next=null;
+
+        left=sortList(left);
+        right=sortList(right);
+
+        return sortedMerge(left,right);
+    }
     public static Node mergeKLists(Node arr[], int last) {
         //last is the no. of times we need to merge , i.e.k-1
         while(last!=0) {
@@ -62,6 +80,30 @@ public class MergeKSorted {
             System.out.print(node.data + " ");
             node = node.next;
         }
+    }
+    public Node insertionSortList(Node head) {
+        if(head==null||head.next==null) return head;
+        Node preInsert;
+        Node toInsert;
+        Node dummy=new Node(-5001);
+        dummy.next=head;
+        Node curr=head;
+        while(curr.next != null){
+            if(curr.data<=curr.next.data){
+                curr=curr.next;
+            }
+            else{
+                toInsert=curr.next;
+                preInsert=dummy;
+                while(preInsert.next.data<toInsert.data){
+                    preInsert=preInsert.next;
+                }
+                curr.next=toInsert.next;//curr.next.next
+                toInsert.next=preInsert.next;
+                preInsert.next=toInsert;
+            }
+        }
+        return dummy.next;
     }
 
     public static void main(String args[]) {
