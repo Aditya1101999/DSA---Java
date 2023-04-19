@@ -22,4 +22,21 @@ public class LongPalindroSubstr {
             start=left+1;
         }
     }
+    int count=0;
+    public int countSubstrings(String s) {
+        int n=s.length();
+        if(n<=1) return n;
+        for(int i=0;i<n;i++){
+            checkforPalindromicSubstring2(s,i,i);//odd length palindromic substring
+            checkforPalindromicSubstring2(s,i,i+1);//even length palindromic substring
+        }
+        return count;
+    }
+    private void checkforPalindromicSubstring2(String s,int left,int right){
+        while(left>=0 && right<s.length() && s.charAt(left)==s.charAt(right)){
+            count++;
+            left--;
+            right++;
+        }
+    }
 }
