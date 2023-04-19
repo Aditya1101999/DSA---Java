@@ -1,5 +1,5 @@
 package Strings;
-public class Chandni {
+public class CharMatch {
     public static int checkOccurance(String str1,String str2){
         int index=-1;
         for(int i=0;i<str1.length();i++){
