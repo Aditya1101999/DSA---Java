@@ -62,6 +62,21 @@ public class LCString {
         //dp[n][m]/2 for maximizing lcs
         return tab(s,sb.reverse().toString(),s.length(), sb.length());
     }
+    public int longestPalindromeSubseq2(String s) {//without involving lcs
+        int[][] dp = new int[s.length()][s.length()];
+
+        for (int i = s.length() - 1; i >= 0; i--) {
+            dp[i][i] = 1;
+            for (int j = i+1; j < s.length(); j++) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = dp[i+1][j-1] + 2;
+                } else {
+                    dp[i][j] = Math.max(dp[i+1][j], dp[i][j-1]);
+                }
+            }
+        }
+        return dp[0][s.length()-1];
+    }
     public static void main(String[] args){
         String str1="abcdge";
         String str2="abedg";
