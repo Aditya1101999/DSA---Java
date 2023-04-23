@@ -3,6 +3,7 @@ package linkList;
 public class Flatten {
     public static class Node{
         int data;
+        Node prev;
         Node next;
         Node bottom;
         public Node(int d) {
@@ -11,7 +12,7 @@ public class Flatten {
             bottom = null;
         }
     }
-    public static Node flatten(Node root){
+    public static Node flatten(Node root){//for singly linked list
         if(root==null||root.next==null) return root;
         //recur for the right node
         root.next=flatten(root.next);
@@ -38,5 +39,30 @@ public class Flatten {
             else temp.bottom=b;
         }
         return res.bottom;
+    }
+    public Node flatten2(Node head) {//for doubly linked list
+        if(head==null) return null;
+
+        Node curr=head;
+        while(curr!=null){
+            if(curr.bottom!=null){
+                //store reference of curr.next
+                Node next=curr.next;
+                curr.next=flatten2(curr.bottom);
+                curr.next.prev=curr;
+                curr.bottom=null;
+                //move to terminal node in child's level
+                while(curr.next!=null){
+                    curr=curr.next;
+                }
+                //connect terminal node to previously stored next
+                if(next!=null){
+                    curr.next=next;
+                    next.prev=curr;
+                }
+            }
+            curr=curr.next;
+        }
+        return head;
     }
 }
