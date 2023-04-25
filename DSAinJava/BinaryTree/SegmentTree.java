@@ -1,6 +1,76 @@
 package BinaryTree;
 
 public class SegmentTree {
+    class SegmentTreeNode{
+        private int start,end;
+        private SegmentTreeNode left,right;
+        private int sum;
+        SegmentTreeNode(int start,int end){
+            this.start=start;
+            this.end=end;
+            this.left=null;
+            this.right=null;
+            this.sum=0;
+        }
+    }
+    SegmentTreeNode root=null;
+
+    public SegmentTree(int[] nums) {
+        root=buildTree(nums,0,nums.length-1);
+    }
+    private SegmentTreeNode buildTree(int[] nums,int start,int end){//O(N)
+        if(start>end){
+            return null;
+        }
+        SegmentTreeNode res=new SegmentTreeNode(start,end);
+        if(start==end){
+            res.sum=nums[start];
+        }
+        else{
+            int mid=start+(end-start)/2;
+            res.left=buildTree(nums,start,mid);
+            res.right=buildTree(nums,mid+1,end);
+            res.sum=res.left.sum+res.right.sum;
+        }
+
+        return res;
+    }
+
+    public void update(int index, int val) {//O(log N)
+        updateHelper(root,index,val);
+    }
+    private void updateHelper(SegmentTreeNode root,int index,int val){
+        if(root.start==root.end){
+            root.sum=val;
+            return;
+        }
+        int mid=root.start+(root.end-root.start)/2;
+        if(index<=mid){//target index on left
+            updateHelper(root.left,index,val);
+        }
+        else{
+            updateHelper(root.right,index,val);
+        }
+        root.sum=root.left.sum+root.right.sum;
+    }
+
+    public int sumRange(int start, int end) {//O(log N)
+        return sumHelper(root,start,end);
+    }
+    private int sumHelper(SegmentTreeNode root,int start,int end){
+        if(root.start==start && root.end==end){//required range found
+            return root.sum;
+        }
+        int mid=root.start+(root.end-root.start)/2;
+        if(end<=mid){//move left
+            return sumHelper(root.left,start,end);
+        }
+        else if(start>mid){
+            return sumHelper(root.right,start,end);
+        }
+        return sumHelper(root.left,start,mid)+sumHelper(root.right,mid+1,end);
+    }
+    //method 2
     static int[] tree;
     public static void init(int n){
         tree=new int[4*n];
