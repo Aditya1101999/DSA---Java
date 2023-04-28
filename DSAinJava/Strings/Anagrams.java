@@ -44,17 +44,25 @@ public class Anagrams {
         }
         return ans;
     }
-    private boolean issAnagram(String s1,String s2){
-        int[] ch=new int[26];
-        for(int i=0;i<s1.length();i++){
-            ch[s1.charAt(i)-'a']++;
-            ch[s2.charAt(i)-'a']--;
+    public boolean issAnagram(String s1, String s2) {
+        if (s1.length() != s2.length()) {
+            return false;
         }
-        for(int i=0;i<ch.length;i++){
-            if(ch[i]!=0) return false;
+        Map<Character, Integer> frequency = new HashMap<>();
+        for (int i = 0; i < s1.length(); i++) {
+            char c1 = s1.charAt(i);
+            char c2 = s2.charAt(i);
+            frequency.put(c1, frequency.getOrDefault(c1, 0) + 1);
+            frequency.put(c2, frequency.getOrDefault(c2, 0) - 1);
+        }
+        for (int count : frequency.values()) {
+            if (count != 0) {
+                return false;
+            }
         }
         return true;
     }
+
     public static void main(String args[]){
         Scanner sc=new Scanner(System.in);
         System.out.println("enter string 1");
