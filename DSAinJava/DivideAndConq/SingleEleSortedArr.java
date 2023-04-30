@@ -8,7 +8,7 @@ public class SingleEleSortedArr {
             int mid=(low+high)/2;
             if((mid%2==0 && nums[mid]==nums[mid+1]) ||
                     (mid%2!=0 && nums[mid]==nums[mid-1])) low=mid+1;
-            else high=mid;
+            else high=mid;//the element lies in the left part
         }
         return nums[low];
     }
