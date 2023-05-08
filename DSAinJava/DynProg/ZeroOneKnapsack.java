@@ -58,6 +58,18 @@ public class ZeroOneKnapsack {
         }
         return dp[n][W];
     }
+    public int combinationSum4(int[] nums, int target) {
+        int[] dp=new int[target+1];
+        dp[0]=1;//1 way to make sum=0
+        for(int i=1;i<=target;i++){//target
+            for(int num:nums){//each number
+                if(num<=i){//include
+                    dp[i]+=dp[i-num];
+                }
+            }
+        }
+        return dp[target];
+    }
     public static void main(String[] args){
         int[] val={15,14,10,45,30};
         int[] wt={2,5,1,3,4};
