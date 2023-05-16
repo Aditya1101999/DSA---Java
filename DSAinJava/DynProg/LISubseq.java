@@ -103,6 +103,20 @@ public class LISubseq {
         }
         return dp.size();
     }
+    public int LISPatienceSort(int[] nums) {
+        TreeSet<Integer>set=new TreeSet<>();
+        for(int num:nums){//finding greater/equal number to num
+            Integer higherOrEqual=set.ceiling(num);
+            if(higherOrEqual!=null){
+                set.remove(higherOrEqual);
+                set.add(num);
+            }
+            else{
+                set.add(num);
+            }
+        }
+        return set.size();
+    }
     public static void main(String[] args){
         int[] arr={50,3,10,7,40,80};
         System.out.println(tab(arr));
