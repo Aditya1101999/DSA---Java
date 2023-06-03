@@ -6,7 +6,7 @@ public class StickCut {
         for (int cut : cuts)
             c.add(cut);
         c.addAll(Arrays.asList(0, n));
-        Collections.sort(c);
+        Collections.sort(c);//to solve the sub-rods independently
         int[][] dp = new int[c.size()][c.size()];
         for (int i = c.size() - 1; i >= 0; i--)
             for (int j = i + 1; j < c.size(); j++) {

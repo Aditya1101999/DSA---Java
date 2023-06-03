@@ -13,7 +13,7 @@ public class MinRotSortArr {
                 low=mid+1;
             }
         }
-        return nums[low];
+        return nums[low];//low also tells how many times the array is rotated
     }
     public int findMin2(int[] nums) {//contains duplicate elements
         int low=0;
