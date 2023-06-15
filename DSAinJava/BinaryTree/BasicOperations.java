@@ -170,6 +170,29 @@ public class BasicOperations {
             }
             return res;
         }
+        public int maxLevelSum(TreeNode root) {
+            Queue<TreeNode>q=new LinkedList<>();
+            q.add(root);
+            int level=0;
+            int maxSum=Integer.MIN_VALUE;
+            int ans=0;
+            while(!q.isEmpty()){
+                level++;
+                int sum=0;
+                int size=q.size();
+                for(int i=0;i<size;i++){//looping for each level
+                    TreeNode curr=q.remove();
+                    sum+=curr.val;
+                    if(curr.left!=null) q.add(curr.left);
+                    if(curr.right!=null) q.add(curr.right);
+                }
+                if(maxSum<sum){
+                    maxSum=sum;
+                    ans=level;
+                }
+            }
+            return ans;
+        }
         private boolean isLeaf(Node node){
             return (node.left==null) && (node.right==null);
         }

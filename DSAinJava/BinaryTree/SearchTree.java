@@ -301,6 +301,21 @@ public class SearchTree {
         }
         return closestEle;
     }
+    TreeNode previ;
+    int minDiff=Integer.MAX_VALUE;
+    public int getMinimumDifference(TreeNode root) {
+        inorder(root);
+        return minDiff;
+    }
+    private void inorder(TreeNode root){
+        if(root==null){
+            return;
+        }
+        inorder(root.left);
+        if(previ!=null) minDiff=Math.min(minDiff,root.val-previ.val);
+        previ=root;
+        inorder(root.right);
+    }
     public static void morrisTraversal(Node root){
         if(root==null){
             return;
