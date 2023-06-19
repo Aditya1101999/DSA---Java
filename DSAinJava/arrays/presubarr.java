@@ -30,6 +30,15 @@ public class presubarr {
         }
         System.out.println("maximum sum is"+maxSum);
     }
+    public int largestAltitude(int[] gain) {
+        int maxAltitude=0;
+        int sum=0;
+        for(int el: gain){
+            sum+=el;
+            maxAltitude=Math.max(maxAltitude,sum);
+        }
+        return maxAltitude;
+    }
     public static void main(String args[]) {
         int numbers[] = {2, 4, 6, 8, 10};
         print_maxsubarray_sum(numbers);
