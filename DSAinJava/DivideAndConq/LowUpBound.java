@@ -24,7 +24,7 @@ public class LowUpBound {
         int ans=-1;
         while(low<=high){
             int mid=high-(low+high)/2;
-            if(arr[mid]>=x){//could be an answer
+            if(arr[mid]>x){//could be an answer
                 ans=mid;
                 high=mid-1;
             }
