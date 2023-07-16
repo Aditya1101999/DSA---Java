@@ -10,8 +10,7 @@ public class MaxJumps {
                 length;i++){
             for(int j=0;j<i;j++){
                 if(Math.abs(nums[i]-nums[j])<=target && dp[j]!=-1){//jump possible from j to i
-                    if(dp[i]!=-1) dp[i]=Math.max(dp[i],dp[j]+1);
-                    else dp[i]=dp[j]+1;//increase jumps
+                    dp[i]=Math.max(dp[i],dp[j]+1);
                 }
             }
         }
