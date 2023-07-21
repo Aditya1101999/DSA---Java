@@ -117,6 +117,31 @@ public class LISubseq {
         }
         return set.size();
     }
+    public int findNumberOfLIS(int[] nums) {
+        int n=nums.length;
+        int[]dp=new int[n];
+        Arrays.fill(dp,1);
+        int[] count=new int[n];
+        Arrays.fill(count,1);
+        int max=0;
+        int ans=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[i]>nums[j] && dp[j]+1>dp[i]){//update the current subsequence
+                    dp[i]=dp[j]+1;
+                    count[i]=count[j];
+                }
+                else if(nums[i]> nums[j] && dp[j]+1==dp[i]){//got same length subsequence
+                    count[i]+=count[j];
+                }
+            }
+            max=Math.max(max,dp[i]);
+        }
+        for(int i=0;i<n;i++){//whoever is giving the LIS
+            if(dp[i]==max) ans+=count[i];
+        }
+        return ans;
+    }
     public static void main(String[] args){
         int[] arr={50,3,10,7,40,80};
         System.out.println(tab(arr));
