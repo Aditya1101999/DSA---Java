@@ -1,7 +1,7 @@
 package DSAinJava.Graphs;
 import java.util.*;
 public class ShortestPathMatrix {
-    class Tuple{
+    static class Tuple{
         int distance;
         int x;
         int y;
@@ -25,7 +25,7 @@ public class ShortestPathMatrix {
         }
         dis[0][0]=0;
         vis[0][0]=true;
-        q.add(new Tuple(1,0,0));
+        q.add(new Tuple(1, 0, 0));
         int[] delRow={-1,-1,0,1,1,1,0,-1};
         int[] delCol={0,1,1,1,0,-1,-1,-1};
         while(!q.isEmpty()){
@@ -40,7 +40,7 @@ public class ShortestPathMatrix {
                 if(nrow>=0 && nrow<n && ncol>=0 && ncol<n && grid[nrow][ncol]==0 && !vis[nrow][ncol] &&
                         u+1<dis[nrow][ncol]){
                     dis[nrow][ncol]=u+1;
-                    q.add(new Tuple(dis[nrow][ncol],nrow,ncol));
+                    q.add(new Tuple(dis[nrow][ncol], nrow, ncol));
                     vis[nrow][ncol]=true;
                 }
             }

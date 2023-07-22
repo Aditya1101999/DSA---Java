@@ -31,7 +31,7 @@ public class Operations {
             }
             curr=curr.children[index];
         }
-        return curr.endWith==true;
+        return curr.endWith;
     }
     public static void main(String[] args){
         String[] words={"i","like","sam","samsung","mobile","ice"};
