@@ -1,10 +1,10 @@
 package DynProg;
 
 public class RodCutting {
-    public int RodCutting(int[] prices, int n) {
+    public int cutRod(int prices[], int n) {
         int[][] dp=new int[n][n+1];
         for(int i=0;i<n+1;i++){
-            dp[0][i]=n*prices[0];//max profit with rod of length 1
+            dp[0][i]=i*prices[0];//max profit with rod of length 1
         }
         for(int i=1;i<n;i++){
             for(int j=0;j<n+1;j++){
@@ -12,7 +12,7 @@ public class RodCutting {
                 int take=Integer.MIN_VALUE;
                 int rodLength=i+1;//for 0th index , length is 1
                 if(rodLength<=j){
-                    take=1+dp[i][j-rodLength];
+                    take=prices[i]+dp[i][j-rodLength];
                 }
                 dp[i][j]=Math.max(notTake,take);
             }

@@ -78,6 +78,39 @@ public class ArrayToBST {
         }
         return result;
     }
+    public List<TreeNode> allPossibleFBT(int n) {
+        Map<Integer,List<TreeNode>>dp=new HashMap<>();
+        return Helper(n,dp);
+    }
+    private List<TreeNode> Helper(int n, Map<Integer,List<TreeNode>>dp){
+        if(n==0||n%2==0){
+            return new ArrayList<>();
+        }
+        if(n==1){
+            List<TreeNode>list=new ArrayList<>();
+            list.add(new TreeNode(0));
+            return list;
+        }
+        if(dp.containsKey(n)){
+            return dp.get(n);
+        }
+        List<TreeNode>ans=new ArrayList<>();
+        for(int l=0;l<n;l++){
+            int r=n-1-l;//root-left
+            List<TreeNode>left=Helper(l,dp);
+            List<TreeNode>right=Helper(r,dp);
+            for(TreeNode le:left){
+                for(TreeNode ri:right){
+                    TreeNode root=new TreeNode(0);
+                    root.left=le;
+                    root.right=ri;
+                    ans.add(root);
+                }
+            }
+        }
+        dp.put(n,ans);
+        return ans;
+    }
     public static void main(String[] args){
         int[] arr={3,5,6,8,10,11,12};
         Node root=createBST(arr,0,arr.length-1);
