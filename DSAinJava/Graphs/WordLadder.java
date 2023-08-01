@@ -104,8 +104,10 @@ public class WordLadder {
         }
         ans=new ArrayList<>();
         List<String>curr=new ArrayList<>();
-        curr.add(endWord);
-        dfs(beginWord,endWord,curr);
+        if(map.containsKey(endWord)) {
+            curr.add(endWord);
+            dfs(beginWord, endWord, curr);
+        }
         return ans;
     }
     private void dfs(String beginWord,String endWord,List<String>curr){

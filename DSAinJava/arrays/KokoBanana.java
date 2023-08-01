@@ -7,13 +7,13 @@ public class KokoBanana {
         for(int pile : piles){
             high=Math.max(high,pile);
         }
-        while(low<high){
+        while(low<=high){
             long mid=low+(high-low)/2;
-            if(!validDivisionPossible(piles,h,mid)){
-                low=mid+1;//minimum val of low
+            if(validDivisionPossible(piles,h,mid)){
+                high=mid-1;
             }
             else{
-                high=mid;//decrementing value to get minimum val
+                low=mid+1;
             }
         }
         return (int)low;

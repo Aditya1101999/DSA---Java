@@ -1,7 +1,7 @@
-package Greedy;
-import java.util.*;
-public class KSubArrays {
+package DSAinJava.DivideAndConq;
+public class KSubArrays {//same solution for painter's partition
     public static int splitArray(int[] nums,int m){
+        if(m> nums.length) return -1;
         int maxNo=0;//low
         int total=0;//high
         for(int el:nums){
@@ -10,7 +10,7 @@ public class KSubArrays {
         }
         int low=maxNo;
         int high=total;
-        while(low<high){
+        while(low<=high){
             int mid=low+(high-low)/2;
             if(validDivisionPossible(mid,nums,m)){
                 high=mid-1;
@@ -23,16 +23,17 @@ public class KSubArrays {
     }
     public static boolean validDivisionPossible(int mid,int[] nums,int m){
         int totSubsets=1;
-        int totRunningSum=0;
+        int currSum=0;
         for(int num:nums){
-            totRunningSum+=num;
-            if(totRunningSum>mid){
-                totRunningSum=0;//reset
-                totRunningSum+=num;
+            if(currSum+num>mid){
                 totSubsets++;
+                currSum=num;
                 if(totSubsets>m){
                     return false;
                 }
+            }
+            else{
+                currSum+=num;
             }
         }
         return true;
