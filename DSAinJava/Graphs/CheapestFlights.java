@@ -39,7 +39,6 @@ public class CheapestFlights {
             int u=q.peek().dis;
             int node=q.peek().node;
             q.remove();
-            if(stops>k) continue;
             for(Pair it : graph.get(node)){
                 int adjNode=it.node;
                 int wt=it.dis;
