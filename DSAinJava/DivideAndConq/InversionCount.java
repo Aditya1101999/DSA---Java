@@ -27,7 +27,7 @@ public class InversionCount {
             //right array
             else {
                 temp[k] = arr[j];
-                invCount += (mid - i);
+                invCount += (mid - i+1);
                 j++;
                 k++;
             }

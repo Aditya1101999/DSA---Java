@@ -1,9 +1,9 @@
-package sorting;
+package DSAinJava.sorting;
 
 public class bubblesort {
     public static void bubble_sort(int arr[]){
-        boolean swapped=false;
         for(int i=0;i<arr.length-1;i++){
+            boolean swapped=false;
             for(int j=0;j<arr.length-1-i;j++){
                 //(arr[j] < arr[j+1]) for descending array
                 if (arr[j] > arr[j+1]) {
@@ -15,7 +15,7 @@ public class bubblesort {
                 }
             }
             //modified bubble sort
-            if(swapped==false){
+            if(!swapped){
                 System.out.println("already sorted");
                 break;
             }

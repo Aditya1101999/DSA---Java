@@ -1,6 +1,8 @@
 package DSAinJava.DivideAndConq;
 
 public class Kthargest {
+    //or use min-heap of size K , and at the end return pq.peek
+    //TC->N log K
     public int findKthLargest(int[] nums, int k) {
         int start=0;
         int end=nums.length-1;

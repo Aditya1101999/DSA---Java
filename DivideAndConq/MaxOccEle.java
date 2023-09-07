@@ -25,11 +25,11 @@ public class MaxOccEle {
         for(int num:nums){
             if(num==el1) count1++;
             else if(num==el2) count2++;
-            else if(count1==0){
+            else if(count1==0 && num!=el2){
                 el1=num;
                 count1++;
             }
-            else if(count2==0){
+            else if(count2==0 && num!=el1){
                 el2=num;
                 count2++;
             }

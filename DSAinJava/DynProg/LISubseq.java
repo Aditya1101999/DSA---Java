@@ -142,6 +142,21 @@ public class LISubseq {
         }
         return ans;
     }
+    public int minimumOperations(List<Integer> nums) {
+        int n=nums.size();
+        int[] dp=new int[n];
+        int max=1;
+        Arrays.fill(dp,1);
+        for(int index=0;index<n;index++){
+            for(int prev=0;prev<index;prev++){
+                if(nums.get(prev)<=nums.get(index)){
+                    dp[index]=Math.max(dp[index],1+dp[prev]);
+                }
+            }
+            max=Math.max(max,dp[index]);
+        }
+        return n-max;
+    }
     public static void main(String[] args){
         int[] arr={50,3,10,7,40,80};
         System.out.println(tab(arr));

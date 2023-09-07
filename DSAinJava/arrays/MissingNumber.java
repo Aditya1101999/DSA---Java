@@ -1,4 +1,4 @@
-package arrays;
+package DSAinJava.arrays;
 import java.util.*;
 public class MissingNumber {
     static int missingNumber(int[] arr){
@@ -61,6 +61,23 @@ public class MissingNumber {
         }
         return arr.length+1;
     }
+    public int firstMissingPositiveSorted(int[] arr) {
+        int low=0;
+        int high=arr.length-1;
+        int ans=arr.length;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(arr[mid]==mid){
+                low=mid+1;
+            }
+            else{
+                ans=mid;
+                high=mid-1;
+            }
+        }
+        return ans;
+    }
+
 
     public static void main(String[] args){
         int[] nums = {3,0,1};

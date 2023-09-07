@@ -19,11 +19,11 @@ public class AlienDictionary {
             }
         }
         List<Integer>topo=topoSort(adj,K);
-        String ans="";
+        StringBuilder ans= new StringBuilder();
         for(int el:topo){
-            ans+=(char)(el+'a');
+            ans.append((char) (el + 'a'));
         }
-        return ans;
+        return ans.toString();
     }
     private static List<Integer> topoSort(List<List<Integer>>adj,int K){
         int[] inDegree=new int[K];
@@ -54,5 +54,6 @@ public class AlienDictionary {
     public static void main(String[] args) {
         int N = 5, K = 4;
         String[] dict = {"baa","abcd","abca","cab","cad"};
+        System.out.println(findOrder(dict,N,K));
     }
 }

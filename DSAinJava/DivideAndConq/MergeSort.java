@@ -1,4 +1,4 @@
-package DivideAndConq;
+package DSAinJava.DivideAndConq;
 import java.util.*;
 public class MergeSort {
     public static void mergeSort(int arr[],int si,int ei){
@@ -44,8 +44,24 @@ public class MergeSort {
             arr[i]=temp[k];
         }
     }
+    public void merge1(int[] nums1, int m, int[] nums2, int n) {
+        int left=m-1;
+        int right=0;
+        while(left>=0 && right<n){
+            if(nums1[left]>nums2[right]){
+                swap(nums1[left],nums2[right]);
+                left--;
+                right++;
+            }
+            else{
+                break;
+            }
+        }
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+    }
     //to store values in two different arrays
-    public void merge(int[] nums1, int m, int[] nums2, int n) {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {//shell sort
         int gap = (int) Math.ceil((m + n) / 2);
         while (gap > 0) {
             int i = 0;
@@ -55,8 +71,8 @@ public class MergeSort {
                     swap(nums1[i], nums1[j]);
                 } else if (j >= m && i <m && nums1[i] > nums2[j - m]) {//1 element in 1st and 1 in 2nd array
                     swap(nums1[i], nums2[j - m]);
-                } else if (j >= m && i >= m && nums2[i - m] > nums2[j - m]) {//both elements in 2nd array
-                    swap(nums2[i - m], nums2[j - m]);
+                } else if (i >= m && nums2[i - m] > nums2[j - m]) {//both elements in 2nd array
+                    swap(nums2[i - m], nums2[j - m]);//if i is on right , j will always be on right
                 }
                 i++;
                 j++;

@@ -93,7 +93,7 @@ public class SearchTree {
             inRange(root.right,k1,k2);
         }
     }
-    public int findCeil(Node root, int key) {//value equal or just greater than key in tree
+    public int ceil(Node root, int key) {//value equal or just greater than key in tree
         int ceil=-1;
         while(root!=null){
             if(key==root.data){
@@ -120,6 +120,12 @@ public class SearchTree {
             }
         }
         return floor;
+    }
+    int mean(Node root, int key){
+        if(root==null) return 0;
+        int val1=ceil(root,key);
+        int val2=floor(root,key);
+        return (int)Math.ceil((val1+val2)/2.0);
     }
     public static void printPath(ArrayList<Integer>path){
         for(int i=0;i< path.size();i++){

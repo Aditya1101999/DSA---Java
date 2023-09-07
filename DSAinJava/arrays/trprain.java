@@ -24,6 +24,35 @@ public class trprain {
         return waterTrapped;
 
     }
+    public int trap(int[] height) {
+        int n=height.length;
+        int left=0;
+        int right=n-1;
+        int leftmax=0;
+        int rightmax=n-1;
+        int trapped=0;
+        while(left<=right){
+            if(height[left]<=height[right]){
+                if(height[left]>=height[leftmax]){
+                    leftmax=left;
+                }
+                else{
+                    trapped+=height[leftmax]-height[left];
+                }
+                left++;
+            }
+            else{
+                if(height[right]>=height[rightmax]){
+                    rightmax=right;
+                }
+                else{
+                    trapped+=height[rightmax]-height[right];
+                }
+                right--;
+            }
+        }
+        return trapped;
+    }
 
     public static void main(String args[]){
         int height[]={4,2,0,6,3,2,5};

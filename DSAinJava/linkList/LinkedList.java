@@ -270,6 +270,27 @@ public class LinkedList {
         }
         return slow;//slow is middle
     }
+    public Node insertGreatestCommonDivisors(Node head) {
+        if(head==null || head.next==null){
+            return head;
+        }
+        Node curr=head;
+        while(curr.next!=null){
+            int a=curr.data;
+            int b=curr.next.data;
+            int gcd=gcd(a,b);
+            Node node=new Node(gcd);
+            node.next=curr.next;
+            curr.next=node;
+            curr=curr.next.next;
+        }
+        return head;
+    }
+    public int gcd(int a, int b){
+        if (b == 0)
+            return a;
+        return gcd(b, a % b);
+    }
     public Node deleteMiddle(Node head) {
         if(head.next==null) return null;
         Node slow=head;

@@ -33,4 +33,33 @@ public class GoldXP {
         }
         return currExp;
     }
+    //eat of be eaten
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int x=sc.nextInt();
+        int[] strength=new int[n];
+        for(int i=0;i<n;i++){
+            strength[i]=sc.nextInt();
+        }
+        PriorityQueue<Integer>pq=new PriorityQueue<>((a,b)->b-a);
+        boolean flag=true;
+        Arrays.sort(strength);
+        if(strength[0]>x) flag=false;
+        for(int i=0;i<n;i++){
+            while(strength[i]<=x){
+                pq.add(strength[i]);
+                i++;
+            }
+            while(x<strength[i] && !pq.isEmpty()){
+                x+=pq.poll();
+            }
+            if(pq.isEmpty()){
+                flag=false;
+                break;
+            }
+        }
+        if(flag) System.out.println("YES");
+        else System.out.println("NO");
+    }
 }

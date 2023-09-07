@@ -16,6 +16,23 @@ public class TwoSum {
         }
         return result;
     }
+    public int countPairs(List<Integer> nums, int target) {
+        int count=0;
+        Collections.sort(nums);
+        int i=0;
+        int j=nums.size()-1;
+        while(i<j){
+            if(nums.get(i)+nums.get(j)<target){
+                count+=j-i;//no. of pairs
+                i++;
+            }
+            else{
+                j--;
+            }
+
+        }
+        return count;
+    }
     public static void main(String[] args){
         int[]  nums = {2,7,11,15};
         int target = 9;

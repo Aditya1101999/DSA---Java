@@ -28,6 +28,12 @@ public class myAtoi {
             ans = ans * 10 + curr;
             i++;
         }
+        while (i < n) {
+            if (!Character.isDigit(s.charAt(i)) && s.charAt(i) != ' ') {
+                return 0; // Invalid input
+            }
+            i++;
+        }
         return neg ? -ans : ans;
     }
 }

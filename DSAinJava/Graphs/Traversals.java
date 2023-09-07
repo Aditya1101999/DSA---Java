@@ -32,12 +32,10 @@ public class Traversals {
     public static void dfsHelper(int node,boolean[] vis,ArrayList<ArrayList<Integer>>graph,ArrayList<Integer>dfs){
         vis[node]=true;
         dfs.add(node);
-        int count=0;
 
         for(int el:graph.get(node)){
             if(!vis[el]){
                 dfsHelper(el,vis,graph,dfs);
-                count++;//no. of connected components->same as no. of provinces
             }
         }
     }

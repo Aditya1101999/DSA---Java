@@ -1,4 +1,4 @@
-package Strings;
+package DSAinJava.Strings;
 
 public class ReverseWords {
     /*reverse each word in string i.e.
@@ -7,12 +7,12 @@ public class ReverseWords {
     public String reverseWords(String s) {
         int n=s.length();
         StringBuilder curr=new StringBuilder();
-        String ans="";
+        StringBuilder ans= new StringBuilder();
         for(int i=0;i<n;i++){
             if(s.charAt(i)==' '){
                 curr.reverse();
-                ans+=curr;
-                ans+=' ';
+                ans.append(curr);
+                ans.append(' ');
                 curr=new StringBuilder();//emptying curr
             }
             else{
@@ -20,8 +20,8 @@ public class ReverseWords {
             }
         }
         curr.reverse();
-        ans+=curr;
-        return ans;
+        ans.append(curr);
+        return ans.toString();
     }
     /*reverse the order of each word in string i.e.
     "the sky is blue"->"blue is sky the"
@@ -64,5 +64,30 @@ public class ReverseWords {
             if(j<n) letters[i++]=' ';//1 valid space
         }
         return new String(letters).substring(0,i);
+    }
+    private static String reverse(String str){
+        char[] arr=str.toCharArray();
+        int i=0;
+        int j=arr.length-1;
+        while(i<j){
+            if ((Character.isLetter(arr[i]) && Character.isLetter(arr[j]))) {
+                swap(arr, i, j);
+                i++;
+                j--;
+            } else {
+                if (!Character.isLetter(arr[i])) {
+                    i++;
+                }
+                if (!Character.isLetter(arr[j])) {
+                    j--;
+                }
+            }
+        }
+        return new String(arr);
+    }
+    private static void swap(char[] arr,int i,int j){
+        char temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
     }
 }

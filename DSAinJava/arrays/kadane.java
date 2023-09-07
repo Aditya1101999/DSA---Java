@@ -14,6 +14,15 @@ public class kadane {
         return max;
 
     }
+    private static int maxSum(int[] nums){
+        int currMax=0;
+        int maxSum=nums[0];
+        for(int el:nums){
+            currMax=Math.max(el,currMax+el);
+            maxSum=Math.max(maxSum,currMax);
+        }
+        return maxSum;
+    }
     public int maxSubarraySumCircular(int[] nums) {
         int totalSum=0;
         int maxSum=nums[0];
