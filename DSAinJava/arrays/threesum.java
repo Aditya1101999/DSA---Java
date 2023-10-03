@@ -1,4 +1,4 @@
-package arrays;
+package DSAinJava.arrays;
 import java.util.*;
 public class threesum{
     public static List<List<Integer>> threeSum(int[] nums) {

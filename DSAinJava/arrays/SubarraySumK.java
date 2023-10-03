@@ -1,4 +1,4 @@
-package arrays;
+package DSAinJava.arrays;
 import java.util.*;
 public class SubarraySumK {
     static ArrayList<Integer> subarraySum(int[] arr, int n, int s) {
