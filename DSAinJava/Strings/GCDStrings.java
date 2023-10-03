@@ -1,4 +1,4 @@
-package Strings;
+package DSAinJava.Strings;
 
 public class GCDStrings {
     public static String gcdOfStrings(String str1, String str2) {

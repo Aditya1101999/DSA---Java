@@ -1,4 +1,4 @@
-package DynProg;
+package DSAinJava.DynProg;
 import java.util.*;
 public class StringChain {
     public static int longestStrChain(String[] words) {
@@ -24,7 +24,7 @@ public class StringChain {
         int first=0;
         int second=0;
         while(first<s1.length()){
-            if(s1.charAt(first)==s2.charAt(second)){
+            if(second < s2.length() && s1.charAt(first) == s2.charAt(second)){
                 first++;
                 second++;
             }

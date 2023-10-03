@@ -1,4 +1,4 @@
-package DivideAndConq;
+package DSAinJava.DivideAndConq;
 import java.util.*;
 public class MaxOccEle {
     public int majorityElement(int[] nums) {//>n/2 times

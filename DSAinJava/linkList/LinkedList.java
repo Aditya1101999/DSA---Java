@@ -228,6 +228,35 @@ public class LinkedList {
         }
         return dummy.next;
     }
+    public static Node sortList(Node head) {
+        Node zero=new Node();
+        Node zeroIt=zero;
+        Node one=new Node();
+        Node oneIt=one;
+        Node two=new Node();
+        Node twoIt=two;
+        Node temp=head;
+        while(temp!=null){
+            if(temp.data==0){
+                zeroIt.next=temp;
+                zeroIt=zeroIt.next;
+
+            }
+            else if(temp.data==1){
+                oneIt.next=temp;
+                oneIt=oneIt.next;
+            }
+            else{
+                twoIt.next=temp;
+                twoIt=twoIt.next;
+            }
+            temp=temp.next;
+        }
+        zeroIt.next=one.next;
+        oneIt.next=two.next;
+        twoIt.next=null;
+        return zero.next;
+    }
     public void removeNthFromLast(int n){
         //calculate size
         int sz=0;

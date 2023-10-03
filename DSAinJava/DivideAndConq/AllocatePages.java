@@ -24,6 +24,7 @@ public class AllocatePages {
         int allotedStudents=1;
         int currPages=0;
         for(int page:pages){
+            if(page>mid) return false;
             if(currPages+page>mid){//new student
                 allotedStudents++;
                 currPages=page;

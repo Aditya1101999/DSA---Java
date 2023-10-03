@@ -70,6 +70,47 @@ public class SubarraySumK {
         list.add(-1);
         return list;
     }
+    public int minOperations(int[] nums, int x) {
+        int n = nums.length;
+        int sum = Arrays.stream(nums).sum();
+        int target = sum - x;
+        int left = 0;
+        int right = 0;
+        int currSum = 0;
+        int min = n;
+
+        while (right < n) {
+            currSum += nums[right];
+            while (currSum > target && left <= right) {
+                currSum -= nums[left];
+                left++;
+            }
+
+            if (currSum == target) {
+                min = Math.min(min, n - (right - left + 1)); // Update min when currSum == target
+            }
+
+            right++;
+        }
+
+        return min == n ? -1 : min; // Return -1 if no valid subarray is found, otherwise return min.
+    }
+    public int minSubArrayLen(int target, int[] nums) {
+        int left=0;
+        int right=0;
+        int sum=0;
+        int ans=Integer.MAX_VALUE;
+        while(right<nums.length){
+            sum+=nums[right];
+            while(sum>=target && left<=right){
+                ans=Math.min(ans,right-left+1);
+                sum-=nums[left];
+                left++;
+            }
+            right++;
+        }
+        return ans==Integer.MAX_VALUE ? 0 : ans;
+    }
 
     public static void main(String[] args){
         int N = 5, S = 12;

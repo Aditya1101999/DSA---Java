@@ -1,39 +1,44 @@
-package Two_DArrays;
+package DSAinJava.Two_DArrays;
 import java.util.*;
 public class SearchMatrix {
-    public static boolean search_sorted_matrix(int matrix[][], int key) {
+    public static int search_sorted_matrix(int matrix[][], int target) {
         //staircase search
-        /*int row = 0;
-        int col = matrix[0].length - 1;
-        while(row<matrix.length && col>=0) {
-            if (matrix[row][col] == key) {
-                System.out.println("element found at (" + row + "," + col + ")");
-                return true;
-            } else if (key < matrix[row][col]) {
-                //moving towards left
-                col--;
-            } else {
-                //moving towards bottom
-                row++;
-            }
-        }*/
-        int col = 0;
-        int row = matrix[0].length - 1;
-        while(col<matrix.length && row>=0) {
-            if (matrix[row][col] == key) {
-                System.out.println("element found at (" + row + "," + col + ")");
-                return true;
-            } else if (key < matrix[row][col]) {
-                //moving towards top
-                row--;
-            } else {
-                //moving towards right
-                col++;
+     /*  int row = matrix.length;
+        if (row == 0) {
+            return 0; // Matrix is empty
+        }
 
+        int col = matrix[0].length;
+        int i = row - 1; // Start from the bottom row
+        int j = 0; // Start from the first column
+
+        while (i >= 0 && j < col) {
+            if (matrix[i][j] == target) {
+                return 1; // Element found
+            } else if (matrix[i][j] < target) {
+                j++; // Move to the right
+            } else {
+                i--; // Move up
             }
         }
-        System.out.println("key not found");
-        return false;
+
+        return 0;
+        */
+        int row=matrix.length;
+        int col = matrix[0].length;
+        int i = 0, j = col - 1; // Start from the top-right corner
+
+        while (i < row && j >= 0) {
+            if (matrix[i][j] == target) {
+                return 1; // Element found
+            } else if (matrix[i][j] < target) {
+                i++; // Move down
+            } else {
+                j--; // Move left
+            }
+        }
+
+        return 0;
 
 
 
