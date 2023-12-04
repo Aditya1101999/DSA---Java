@@ -362,6 +362,13 @@ public class LinkedList {
         }
         return true;
     }
+//    private void createCycle(Node head){
+//        Node curr=head;
+//        while(curr.next!=null){
+//            curr=curr.next;
+//        }
+//        curr.next=head;
+//    }
     public static boolean isCycle(){
         Node slo=head;
         Node fas=head;
