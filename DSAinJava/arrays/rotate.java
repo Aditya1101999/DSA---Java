@@ -1,6 +1,14 @@
-package arrays;
+package DSAinJava.arrays;
 
 public class rotate {
+    public void rotateByOne(int arr[], int n)
+    {
+        int lastEle=arr[n-1];
+        for(int i=n-1;i>0;i--){
+            arr[i]=arr[i-1];
+        }
+        arr[0]=lastEle;
+    }
     public static void rotated(int[] nums, int k) {
         k %= nums.length;
         reverse(nums, 0, nums.length - 1);

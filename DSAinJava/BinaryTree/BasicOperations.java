@@ -289,6 +289,26 @@ public class BasicOperations {
         }
         return ans;
     }
+        public String tree2str(TreeNode root) {
+            if(root==null){
+                return "";
+            }
+            String result=Integer.toString(root.val);
+            String leftStr=tree2str(root.left);
+            String rightStr=tree2str(root.right);
+
+            if(root.left==null && root.right==null){
+                return result;
+            }
+
+            if(root.left==null){
+                return result+"()"+"("+rightStr+")";
+            }
+            if(root.right==null){
+                return result+"("+leftStr+")";
+            }
+            return result+"("+leftStr+")"+"("+rightStr+")";
+        }
     public void childrenSumProperty(Node root){
             if(root==null) return;
             int child=0;
