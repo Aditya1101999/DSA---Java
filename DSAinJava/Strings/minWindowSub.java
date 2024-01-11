@@ -30,4 +30,30 @@ public class minWindowSub {
         }
         return minLen==Integer.MAX_VALUE ? "" : s.substring(minStart,minStart+minLen);
     }
+    public int smallestSubstring(String s) {
+        boolean zero=false,one=false,two=false;
+        int zeroIndex=-1,oneIndex=-1,twoIndex=-1;
+        int res=Integer.MAX_VALUE;
+        for(int i=0;i<s.length();i++){
+            char curr=s.charAt(i);
+            if(curr=='0'){
+                zeroIndex=i;
+                zero=true;
+            }
+            else if(curr=='1'){
+                oneIndex=i;
+                one=true;
+            }
+            else{
+                twoIndex=i;
+                two=true;
+            }
+            if(zero && one && two){
+                int diff=Math.max(zeroIndex,Math.max(oneIndex,twoIndex))-Math.min(zeroIndex,Math.min(oneIndex,twoIndex))
+                        +1;
+                res=Math.min(res,diff);
+            }
+        }
+        return res==Integer.MAX_VALUE ? -1 : res;
+    }
 }

@@ -574,6 +574,35 @@ public class BasicOperations {
                 return leftDis+1;
             }
         }
+        //approach 1->store all leaf nodes of both trees and compare
+        public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+            Stack<Integer>st=new Stack<>();
+            fillStack(root1,st);
+            boolean flag=checkStack(root2,st);
+            return flag && st.isEmpty();
+        }
+        private void fillStack(TreeNode root,Stack<Integer>st){
+            if(root==null){
+                return;
+            }
+            if(root.left==null && root.right==null){
+                st.push(root.val);
+            }
+            fillStack(root.left,st);
+            fillStack(root.right,st);
+        }
+        private boolean checkStack(TreeNode root, Stack<Integer> st) {
+            if (root == null) {
+                return true;
+            }
+            if (root.left == null && root.right == null) {
+                if (st.isEmpty() || st.peek() != root.val) {
+                    return false;
+                }
+                st.pop();
+            }
+            return checkStack(root.right, st) && checkStack(root.left, st);
+        }
         public static int Kancestor(Node root,int n,int k){
             if(root==null){
                 return -1;
@@ -682,6 +711,48 @@ public class BasicOperations {
             max[0]=Math.max(max[0],left+right+node.data);
             return Math.max(left,right)+node.data;
         }
+    }
+    /*approach 1->
+ Just simply take a root, find all the differences of it from its childres and find max one
+ Again go to root->left and do the same as above
+ Again go to root->right and do the same as above
+*/
+    int maxDiff=Integer.MIN_VALUE;
+    public int maxAncestorDiffBrute(TreeNode root) {
+        findMaxDiff(root);
+        return maxDiff;
+    }
+    private void findMaxDiff(TreeNode root){
+        if(root==null || (root.left==null && root.right==null)) return;
+
+        findDiffHelper(root,root.left);
+        findDiffHelper(root,root.right);
+
+        findMaxDiff(root.left);
+        findMaxDiff(root.right);
+    }
+    private void findDiffHelper(TreeNode root,TreeNode child){
+        if(root==null || child==null) return;
+
+        maxDiff=Math.max(maxDiff,Math.abs(root.val-child.val));
+
+        findDiffHelper(root,child.left);
+        findDiffHelper(root,child.right);
+    }
+    public int maxAncestorDiffOptimized(TreeNode root) {
+        return findMax(root,root.val,root.val);
+    }
+    private int findMax(TreeNode root,int max,int min){
+        if(root==null){
+            return Math.abs(max-min);
+        }
+        max=Math.max(root.val,max);
+        min=Math.min(root.val,min);
+
+        int left=findMax(root.left,max,min);
+        int right=findMax(root.right,max,min);
+
+        return Math.max(left,right);
     }
         public static void main(String[] args) {
             int[] nodes = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};

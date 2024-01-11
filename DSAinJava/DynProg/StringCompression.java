@@ -18,7 +18,7 @@ public class StringCompression {
         if( dp[i][prevChar][freq][k]!=-1) return  dp[i][prevChar][freq][k];
         int delete=Integer.MAX_VALUE;
         if(k>0) delete=compressionHelper(s,i+1,prevChar,freq,k-1,dp);
-        int keep=0;
+        int keep;
         if(s.charAt(i)-'a'==prevChar){
             //RLE
             int oneLengthAdd=0;

@@ -283,6 +283,14 @@ public class SearchTree {
             inRangeSumHelper(root.right,k1,k2);
         }
     }
+    public int rangeSumBST(TreeNode root, int low, int high) {
+        if(root==null) return 0;
+
+        if(root.val<low) return rangeSumBST(root.right,low,high);
+        else if(root.val>high) return rangeSumBST(root.left,low,high);
+
+        return root.val+rangeSumBST(root.left,low,root.val)+rangeSumBST(root.right,root.val,high);
+    }
     public static Node closestElement(Node root,int val){
         if(root==null){
             return null;

@@ -42,6 +42,21 @@ public class SubarraySumK {
         }
         return ans;
     }
+    public int numberOfSubarrays(int[] nums, int k) {//with k odd elements
+        int n=nums.length;
+        int prefixSum=0;
+        int ans=0;
+        Map<Integer,Integer>map=new HashMap<>();
+        map.put(0,1);//<prefixSum,frequency of the sum>
+        for(int i=0;i<n;i++){
+            prefixSum+=(nums[i]&1);//add only if nums is odd
+            if(map.containsKey(prefixSum-k)){
+                ans+=map.get(prefixSum-k);
+            }
+            map.put(prefixSum,map.getOrDefault(prefixSum,0)+1);
+        }
+        return ans;
+    }
     static ArrayList<Integer> subarraySum2(int[] arr, int n, int s) {
         int i=0;
         int j=0;
@@ -94,6 +109,27 @@ public class SubarraySumK {
         }
 
         return min == n ? -1 : min; // Return -1 if no valid subarray is found, otherwise return min.
+    }
+    public long maxSumWithK(long a[], long n, long k) {//at least size k
+        long initialSum=0;
+        int i=0;
+        while(i<k){
+            initialSum+=a[i++];
+        }
+        long maxSum=initialSum;
+        int j=0;
+        int last=0;
+        while(i<n){
+            initialSum+=a[i++];
+            last+=a[j++];
+            maxSum=Math.max(maxSum,initialSum);
+            if(last<0){
+                initialSum-=last;
+                last=0;
+                maxSum=Math.max(maxSum,initialSum);
+            }
+        }
+        return maxSum;
     }
     public int minSubArrayLen(int target, int[] nums) {
         int left=0;

@@ -1,4 +1,4 @@
-package arrays;
+package DSAinJava.arrays;
 import java.util.*;
 public class ArraysEqual {
     public static boolean check(long A[],long B[],int n) {
@@ -18,6 +18,17 @@ public class ArraysEqual {
 
         }
         return true;
+    }
+    public int minMoves2(int[] nums) {//minimum moves to make arrat equal
+        Arrays.sort(nums);
+        int start=0;
+        int end=nums.length-1;
+        int ans=0;
+        while(start<end){
+            //(x + nums[i]) = (nums[n-1-i] - y) =>(x+y)=> nums[n-1-i] - nums[i]
+            ans+=nums[end--]-nums[start++];
+        }
+        return ans;
     }
     public static void main(String[] args)
     {
