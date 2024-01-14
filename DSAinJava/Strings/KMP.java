@@ -1,6 +1,36 @@
 package DSAinJava.Strings;
 import java.util.*;
 public class KMP {
+    public List<Integer> beautifulIndices(String s, String a, String b, int k) {
+        List<Integer>ans=new ArrayList<>();
+        List<Integer>aIndices=search(a,s);
+        List<Integer>bIndices=search(b,s);
+        for (int el1 : aIndices) {
+            int leftBound = el1 - k;
+            int rightBound = el1 + k;
+
+            if (binarySearchInRange(bIndices, leftBound, rightBound)) {
+                ans.add(el1);
+            }
+        }
+        return ans;
+    }
+    boolean binarySearchInRange(List<Integer> arr, int low, int high) {
+        int left = 0, right = arr.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int midValue = arr.get(mid);
+
+            if (midValue >= low && midValue <= high) {
+                return true;
+            } else if (midValue < low) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return false;
+    }
     int[] lps(String s) {
         int n=s.length();
         int[] prefixSuffix=new int[n];

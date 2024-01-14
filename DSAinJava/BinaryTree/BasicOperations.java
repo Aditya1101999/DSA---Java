@@ -501,6 +501,21 @@ public class BasicOperations {
             KthLevel(root.left, level + 1, k);
             KthLevel(root.right, level + 1, k);
         }
+        public boolean isValidSerialization(String preorder) {
+            String[] nodes=preorder.split(",");
+            int vacancy=1;//for root
+            for(String node : nodes){
+                vacancy--;
+
+                if(vacancy<0){
+                    return false;
+                }
+                if(!node.equals("#")){
+                    vacancy+=2;//valid node
+                }
+            }
+            return vacancy==0;
+        }
         public static Node lca(Node root, int n1, int n2) {//O(n)
             ArrayList<Node> path1 = new ArrayList<>();
             ArrayList<Node> path2 = new ArrayList<>();
