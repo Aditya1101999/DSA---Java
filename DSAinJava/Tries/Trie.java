@@ -40,17 +40,37 @@ public class Trie {
         }
         node.setEnd();
     }
-
     public static boolean search(String word) {
-        TrieNode node=root;
-        for(int i=0;i<word.length();i++){
-            if(!node.containsKey(word.charAt(i))){
+        return search(word,root);
+    }
+
+//    public static boolean search(String word) {
+//        TrieNode node=root;
+//        for(int i=0;i<word.length();i++){
+//            if(!node.containsKey(word.charAt(i))){
+//                return false;
+//            }
+//            node=node.get(word.charAt(i));
+//        }
+//        return node.isEnd();
+//
+//    }
+    private static boolean search(String word,TrieNode root){
+        TrieNode node = root;
+        for (int i = 0; i < word.length(); i++) {
+            if (word.charAt(i) == '.') {
+                for (TrieNode child : node.children) {
+                    if (child != null && search(word.substring(i + 1),child)) {
+                        return true;
+                    }
+                }
+                return false;
+            } else if (!node.containsKey(word.charAt(i))) {
                 return false;
             }
-            node=node.get(word.charAt(i));
+            node = node.get(word.charAt(i));
         }
         return node.isEnd();
-
     }
 
     public boolean startsWith(String word) {

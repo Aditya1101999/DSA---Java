@@ -237,6 +237,25 @@ public class BasicOperations {
             }
 
         }
+        static int anss;
+        public int pseudoPalindromicPaths (TreeNode root) {
+            anss=0;
+            solve(root,0);
+            return anss;
+        }
+        private void solve(TreeNode root,int mask){
+            if(root==null){
+                return;
+            }
+            mask^=(1<<root.val);
+            if(root.left==null && root.right==null){//leaf
+                if((mask & mask-1)==0){//only one set bit
+                    anss++;
+                }
+            }
+            solve(root.left,mask);
+            solve(root.right,mask);
+        }
         public int findBottomLeftValue(Node root) {
             Queue<Node>q=new LinkedList<>();
             q.add(root);
@@ -250,6 +269,33 @@ public class BasicOperations {
                 }
             }
             return root.data;
+        }
+        class Solution {
+            static int res;
+            public int countPairs(TreeNode root, int distance) {
+                res=0;
+                solve(root,distance);
+                return res;
+            }
+            private List<Integer> solve(TreeNode root,int distance){
+                if(root==null) return new ArrayList<>();
+                if(root.left==null && root.right==null){
+                    List<Integer>ans=new ArrayList<>();
+                    ans.add(1);
+                    return ans;
+                }
+                List<Integer>left=solve(root.left,distance);
+                List<Integer>right=solve(root.right,distance);
+                for(int l : left){
+                    for(int r : right){
+                        if(l+r<=distance) res++;
+                    }
+                }
+                List<Integer>leaves=new ArrayList<>();
+                for(int el : left)  if(el+1<distance) leaves.add(el+1);
+                for(int el : right) if(el+1<distance) leaves.add(el+1);
+                return leaves;
+            }
         }
         public static int height(Node root) {
             if (root == null) {
@@ -289,6 +335,45 @@ public class BasicOperations {
         }
         return ans;
     }
+        static int ans;
+        public static int distributeCandy(Node root)
+        {
+            ans=0;
+            solve(root);
+            return ans;
+        }
+        private static int solve(Node root){
+            if(root==null){
+                return 0;
+            }
+            int left=solve(root.left);
+            int right=solve(root.right);
+            //could be requirement as well
+            ans+=Math.abs(left)+Math.abs(right);//calculate moves for the children
+            return left+right+root.data-1;//keeping one candy for itself
+        }
+        public static ArrayList<ArrayList<Integer>> printPaths(Node root, int sum)
+        {
+            // code here
+            ArrayList<ArrayList<Integer>>ans=new ArrayList<>();
+            List<Integer>temp=new ArrayList<>();
+            solve(0,root,sum,ans,temp);
+            return ans;
+        }
+        private static void solve(int curr,Node root, int sum,ArrayList<ArrayList<Integer>>ans,List<Integer>temp){
+            if(root==null){
+                return;
+            }
+            temp.add(root.data);
+            curr+=root.data;
+            if(curr==sum){
+                ans.add(new ArrayList<>(temp));
+            }
+            solve(curr,root.left,sum,ans,temp);
+            solve(curr,root.right,sum,ans,temp);
+            temp.remove(temp.size()-1);
+
+        }
         public String tree2str(TreeNode root) {
             if(root==null){
                 return "";

@@ -1,4 +1,4 @@
-package BitManipulation;
+package DSAinJava.BitManipulation;
 
 public class MissingNumber {
     public static int missingNumber(int[] nums) {

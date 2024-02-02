@@ -1,6 +1,48 @@
-package DynProg;
+package DSAinJava.DynProg;
 import java.util.*;
 public class MCM {
+    static class Pair2{
+        int val;
+        String str;
+        Pair2(int val,String str){
+            this.val=val;
+            this.str=str;
+        }
+    }
+    public static String matrixChainOrder(int[] arr, int n) {
+        Pair2[][] dp = new Pair2[n][n];
+        Pair2 pair = memo(arr, 1, n - 1, dp);
+        return pair.str;
+    }
+
+    public static Pair2 memo(int[] arr, int i, int j, Pair2[][] dp) {
+        if (i == j) {
+            String str = Character.toString((char) ('A' + i - 1));
+            return new Pair2(0, str);
+        }
+
+        if (dp[i][j] != null) {
+            return dp[i][j];
+        }
+
+        int ans = Integer.MAX_VALUE;
+        String str = "";
+        for (int k = i; k < j; k++) {
+            Pair2 cost1 = memo(arr, i, k, dp); // Ai...Ak=>arr[i-1]x arr[k]
+            Pair2 cost2 = memo(arr, k + 1, j, dp); // Ak+1...Aj=>arr[k]x arr[j]
+            int cost3 = arr[i - 1] * arr[k] * arr[j]; // a*b*c
+            int finalCost = cost1.val + cost2.val + cost3;
+
+            if (finalCost < ans) {
+                ans = finalCost;
+                str = "(" + cost1.str + cost2.str + ")";
+            }
+        }
+
+        Pair2 pair2 = new Pair2(ans, str);
+        dp[i][j] = pair2;
+        return pair2;
+    }
     public static int mincost(int[] arr,int i,int j){
         if(i==j){//single matrix
             return 0;

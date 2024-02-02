@@ -21,4 +21,39 @@ public class PeakElement {
         }
         return -1;
     }
+    public int findInMountainArray(int target, int[] mountainArr) {
+        int n=mountainArr.length;
+        int peak=findPeakElement(mountainArr);
+        int low=0;
+        int high=peak;
+        while(low<=high){//increasing part
+            int mid=low+(high-low)/2;
+            int midValue=mountainArr[mid];
+            if(midValue==target){
+                return mid;
+            }
+            else if(midValue<target){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        low=peak;
+        high=n-1;
+        while(low<=high){//decreasing part
+            int mid=low+(high-low)/2;
+            int midValue=mountainArr[mid];
+            if(midValue==target){
+                return mid;
+            }
+            else if(midValue>target){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        return -1;
+    }
 }

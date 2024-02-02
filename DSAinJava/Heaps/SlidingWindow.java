@@ -1,4 +1,4 @@
-package Heaps;
+package DSAinJava.Heaps;
 
 import java.util.PriorityQueue;
 
@@ -27,7 +27,7 @@ public class SlidingWindow {
         }
         res[0]=pq.peek().val;
         for(int i=k;i<arr.length;i++){
-            while(pq.size()>0&&pq.peek().idx<=i-k){
+            while(!pq.isEmpty() &&pq.peek().idx<=i-k){
                 pq.remove();//element not in curr window
             }
             pq.add(new Pair(arr[i],i));

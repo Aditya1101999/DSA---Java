@@ -1,4 +1,4 @@
-package Stack;
+package DSAinJava.Stack;
 import java.util.*;
 public class SimplifyPath {
     public static String simplifyPath(String path) {

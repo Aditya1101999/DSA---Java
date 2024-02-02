@@ -1,33 +1,27 @@
 package Queues;
 import java.util.*;
 public class MaxSubarray {
-    public static void printMax(int[] arr,int n,int k) {
-        Deque<Integer> q = new LinkedList<>();
-        int i;
-        for (i = 0; i < k; ++i) {
-            while (!q.isEmpty() && arr[i] >= arr[q.peekLast()]) {
-                q.removeLast();
+    public static int[] printMax(int[] a,int n,int k) {
+        int[] r = new int[n - k + 1];
+        int ri = 0;
+        // store index
+        Deque < Integer > q = new ArrayDeque < > ();
+        for (int i = 0; i < a.length; i++) {
+            // remove numbers out of range k
+            if (!q.isEmpty() && q.peek() <= i - k) {
+                q.poll();
             }
-            q.addLast(i);
-//previous smaller useless elements are removed
-        }
-            //the first part of the
-            //for statement was already set somewhere in the code
-            for (; i < n; ++i) {//for rest elements
-                System.out.print(arr[q.peek()] + " ");
-                //element at the front is the largest element of previous window
+            // remove smaller numbers in k range as they are useless
+            while (!q.isEmpty() && a[q.peekLast()] <= a[i]) {
+                q.pollLast();
+            }
 
-                //removing elements which are not in this window
-                while (!q.isEmpty() && q.peek() <= i - k) {
-                    q.removeFirst();
-                }
-                //last element
-                while (!q.isEmpty() && arr[i] >= arr[q.peekLast()]) {
-                    q.removeLast();
-                }
-                q.addLast(i);
+            q.offer(i);
+            if (i >= k - 1) {
+                r[ri++] = a[q.peek()];
             }
-                    System.out.print(arr[q.peek()]);
+        }
+        return r;
     }
     public static void main(String[] args){
         int[] arr={12,1,78,90,57,89,56};
