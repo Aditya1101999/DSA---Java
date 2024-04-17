@@ -1,4 +1,5 @@
 package DSAinJava.linkList;
+import java.util.*;
 public class LinkedList {
     public static class Node{
         int data;
@@ -187,6 +188,32 @@ public class LinkedList {
         //if element found , add one index value for each
         //recursive call
         return index+1;
+    }
+    public Node removeZeroSumSublists(Node head) {
+        Node dummy=new Node(0);
+        dummy.next=head;
+        Node curr=dummy;
+        int prefixSum=0;
+        Map<Integer,Node>map=new HashMap<>();
+        while(curr!=null){
+            prefixSum+=curr.data;
+            if(map.containsKey(prefixSum)){
+                Node prev=map.get(prefixSum);
+                Node firstNodeRemoved=prev.next;
+                int sum=prefixSum+firstNodeRemoved.data;
+                while(sum!=prefixSum){
+                    map.remove(sum);
+                    firstNodeRemoved=firstNodeRemoved.next;
+                    sum+=firstNodeRemoved.data;
+                }
+                prev.next=curr.next;
+            }
+            else{
+                map.put(prefixSum,curr);
+            }
+            curr=curr.next;
+        }
+        return dummy.next;
     }
     public int recursiveSearch(int key){
 

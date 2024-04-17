@@ -306,6 +306,105 @@ public class BasicOperations {
             int h = Math.max(lh, rh) + 1;
             return h;
         }
+        public boolean isEvenOddTree(TreeNode root) {
+            Queue<TreeNode>q=new LinkedList<>();
+            boolean evenLevel=true;
+            q.add(root);
+            while(!q.isEmpty()){
+                int size=q.size();
+                int prev=Integer.MAX_VALUE;
+                if(evenLevel) prev=Integer.MIN_VALUE;
+                while(size-->0){
+                    TreeNode node=q.poll();
+                    if(evenLevel && (node.val%2==0 || node.val<=prev)) return false;
+                    if(!evenLevel && (node.val%2!=0 || node.val>=prev)) return false;
+                    if(node.left!=null){
+                        q.add(node.left);
+                    }
+                    if(node.right!=null){
+                        q.add(node.right);
+                    }
+                    prev=node.val;
+                }
+                evenLevel=!evenLevel;
+            }
+            return true;
+        }
+        public int sumNumbers(TreeNode root) {
+            return solve1(root,0);
+        }
+        private int solve1(TreeNode root,int curr){
+            if(root==null){
+                return 0;
+            }
+            curr=curr*10+root.val;
+            if(isLeaf(root)) return curr;
+
+            int left=solve1(root.left,curr);
+            int right=solve1(root.right,curr);
+            return left+right;
+        }
+        public TreeNode addOneRow(TreeNode root, int val, int depth) {
+            if(depth==1){
+                TreeNode newroot=new TreeNode(val);
+                newroot.left=root;
+                return newroot;
+            }
+            return solve(root,val,depth,1);
+        }
+        private TreeNode solve(TreeNode root, int val, int depth,int currDepth){
+            if(root==null){
+                return null;
+            }
+            if(currDepth==depth-1){
+                TreeNode left=root.left;
+                TreeNode right=root.right;
+                root.left=new TreeNode(val);
+                root.right=new TreeNode(val);
+                root.left.left=left;
+                root.right.right=right;
+                return root;
+            }
+            solve(root.left,val,depth,currDepth+1);
+            solve(root.right,val,depth,currDepth+1);
+            return root;
+
+        }
+        String str="";
+        public String smallestFromLeaf(TreeNode root) {
+            dfs(root,"");
+            return str;
+        }
+        private void dfs(TreeNode root,String curr){
+            if(root==null){
+                return;
+            }
+            curr=(char)(root.val+'a')+curr;
+            if(root.left==null && root.right==null){
+                if(str=="" || curr.compareTo(str)<0){
+                    str=curr;
+                }
+            }
+            dfs(root.left,curr);
+            dfs(root.right,curr);
+        }
+        public int sumOfLeftLeaves(TreeNode root) {
+            return dfs(root,false);
+        }
+        private int dfs(TreeNode root,boolean isLeft){
+            if(root==null){
+                return 0;
+            }
+            if(isLeft && isLeaf(root)){
+                return root.val;
+            }
+            int left=dfs(root.left,true);
+            int right=dfs(root.right,false);
+            return left+right;
+        }
+        private boolean isLeaf(TreeNode root){
+            return root.left==null && root.right==null;
+        }
     public int widthOfBinaryTree(Node root) {
         if(root==null) return 0;
         int ans=0;
