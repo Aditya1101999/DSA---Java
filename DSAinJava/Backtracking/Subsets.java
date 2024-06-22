@@ -10,13 +10,21 @@ public class Subsets {
         return ans;
     }
     private void findSubsets(int index,int[] nums,List<List<Integer>>ans,ArrayList<Integer>curr){
-        ans.add(new ArrayList<>(curr));
-
-        for(int i=index;i<nums.length;i++){
-            curr.add(nums[i]);
-            findSubsets(i+1,nums,ans,curr);
-            curr.remove(curr.size()-1);
+        if(index==nums.length){
+            ans.add(new ArrayList<>(curr));
+            return;
         }
+        findSubsets(index+1,nums,ans,curr);
+        curr.add(nums[index]);
+        findSubsets(index+1,nums,ans,curr);
+        curr.remove(curr.size()-1);
+//         ans.add(new ArrayList<>(curr));
+
+//         for(int i=index;i<nums.length;i++){
+//             curr.add(nums[i]);
+//             findSubsets(i+1,nums,ans,curr);
+//             curr.remove(curr.size()-1);
+//         }
     }
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>>ans=new ArrayList<>();

@@ -189,6 +189,27 @@ public class LinkedList {
         //recursive call
         return index+1;
     }
+    Node delete(Node head, int k)
+    {
+        if(k==1) return null;
+        Node curr=head;
+        Node prev=null;
+        int count=0;
+        while(curr!=null){
+            count++;
+            if(count==k){
+                if(curr.next==null){
+                    prev.next=null;
+                    break;
+                }
+                prev.next=curr.next;
+                count=0;
+            }
+            prev=curr;
+            curr=curr.next;
+        }
+        return head;
+    }
     public Node removeZeroSumSublists(Node head) {
         Node dummy=new Node(0);
         dummy.next=head;
@@ -214,6 +235,43 @@ public class LinkedList {
             curr=curr.next;
         }
         return dummy.next;
+    }
+    private boolean isVowel(int c){
+        return (c=='a' || c=='e' || c=='i' || c=='o' || c=='u');
+    }
+
+    public Node arrangeCV(Node head){
+        Node newHead=head;
+        Node curr=head;
+        Node latestVowel;
+        if(isVowel(head.data)){
+            latestVowel=head;
+        }
+        else{
+            while(curr.next!=null && !isVowel(curr.next.data)){
+                curr=curr.next;
+            }
+            if(curr.next==null) return head;//no vowels
+            latestVowel=newHead=curr.next;//first vowel
+            curr.next=curr.next.next;
+            newHead.next=head;
+        }
+        while(curr.next!=null){
+            if(isVowel(curr.next.data)){
+                if(curr==latestVowel){
+                    latestVowel=curr=curr.next;
+                }
+                else{
+                    Node temp=latestVowel.next;
+                    latestVowel.next=curr.next;
+                    latestVowel=latestVowel.next;
+                    curr.next=curr.next.next;
+                    latestVowel.next=temp;
+                }
+            }
+            else curr=curr.next;
+        }
+        return newHead;
     }
     public int recursiveSearch(int key){
 

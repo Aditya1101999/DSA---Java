@@ -1,4 +1,4 @@
-package linkList;
+package DSAinJava.linkList;
 
 public class DoubleLinkList {
     public static class Node{
@@ -94,6 +94,54 @@ public class DoubleLinkList {
             curr=next;
         }
         head=prev;//curr is null , so node before curr is head
+    }
+    public static Node sortDoubly(Node node) {
+        if (node == null || node.next == null) {
+            return node;
+        }
+
+        Node second = splitList(node);
+
+        node = sortDoubly(node);
+        second = sortDoubly(second);
+
+        return merge(node, second);
+    }
+
+    public static Node splitList(Node node) {
+        Node fast = node, slow = node;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        Node temp = slow.next;
+        slow.next = null;
+        return temp;
+    }
+
+    // Function to merge two halves of list.
+    public static Node merge(Node first, Node second) {
+        // base cases when either of two halves is null.
+        if (first == null) {
+            return second;
+        }
+        if (second == null) {
+            return first;
+        }
+
+        if (first.data < second.data) {
+            first.next = merge(first.next, second);
+            first.next.prev = first;
+            first.prev = null;
+            // returning the resultant list.
+            return first;
+        } else {
+            second.next = merge(first, second.next);
+            second.next.prev = second;
+            second.prev = null;
+            // returning the resultant list.
+            return second;
+        }
     }
     public static void main(String[] args){
         DoubleLinkList dll=new DoubleLinkList();

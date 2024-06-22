@@ -19,4 +19,23 @@ public class IntersectionArrays {
         }
         return ans;
     }
+    public int[] intersection2(int[] nums1, int[] nums2) {
+        Map<Integer,Integer>map=new HashMap<>();
+        for(int el : nums1){
+            map.put(el,1);
+        }
+        List<Integer>ans=new ArrayList<>();
+        for(int el : nums2){
+            if(map.containsKey(el) && map.get(el)==1){
+                ans.add(el);
+                map.put(el,0);
+            }
+        }
+        int[] arr=new int[ans.size()];
+        int index=0;
+        for(int el : ans){
+            arr[index++]=el;
+        }
+        return arr;
+    }
 }

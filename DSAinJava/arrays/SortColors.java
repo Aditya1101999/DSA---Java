@@ -1,4 +1,4 @@
-package arrays;
+package DSAinJava.arrays;
 
 public class SortColors {
     public static void sortColors(int[] nums) {
@@ -25,6 +25,30 @@ public class SortColors {
                     high--;
                     break;
                 }
+            }
+        }
+    }
+    public void threeWayPartition(int[] nums, int a, int b){
+        int n=nums.length;
+        int low=0;
+        int mid=0;
+        int high=n-1;
+        while(mid<=high){
+            if(nums[mid]<a){
+                int temp=nums[mid];
+                nums[mid]=nums[low];
+                nums[low]=temp;
+                low++;
+                mid++;
+            }
+            else if(nums[mid]>b){
+                int temp=nums[mid];
+                nums[mid]=nums[high];
+                nums[high]=temp;
+                high--;
+            }
+            else{//in range
+                mid++;
             }
         }
     }

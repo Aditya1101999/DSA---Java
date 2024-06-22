@@ -77,6 +77,12 @@ public class LCString {
         }
         return dp[0][s.length()-1];
     }
+    public int kPalindrome(String str, int n, int k) {
+        StringBuilder sb=new StringBuilder(str);
+        String newStr=sb.reverse().toString();
+        int common=lcs(str,newStr,n,n);
+        return (n-common)<=k ? 1 : 0;
+    }
     public static void main(String[] args){
         String str1="abcdge";
         String str2="abedg";

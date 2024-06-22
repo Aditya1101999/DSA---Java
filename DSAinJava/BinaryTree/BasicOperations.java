@@ -388,6 +388,23 @@ public class BasicOperations {
             dfs(root.left,curr);
             dfs(root.right,curr);
         }
+        ArrayList<Integer> Kdistance(Node root, int k)
+        {
+            ArrayList<Integer>ans=new ArrayList<>();
+            solve(root,k,ans,0);
+            return ans;
+        }
+        void solve(Node root,int k,ArrayList<Integer>ans,int curr){
+            if(root==null){
+                return;
+            }
+            if(curr==k){
+                ans.add(root.data);
+                return;
+            }
+            solve(root.left,k,ans,curr+1);
+            solve(root.right,k,ans,curr+1);
+        }
         public int sumOfLeftLeaves(TreeNode root) {
             return dfs(root,false);
         }
@@ -434,6 +451,112 @@ public class BasicOperations {
         }
         return ans;
     }
+        ArrayList<Integer> noSibling(Node node)
+        {
+            ArrayList<Integer>ans=new ArrayList<>();
+            Helper(node,ans);
+            Collections.sort(ans);
+            if(ans.size()==0) ans.add(-1);
+            return ans;
+        }
+        void Helper(Node node,ArrayList<Integer>ans){
+            if(node==null){
+                return;
+            }
+            if(node.left==null && node.right!=null){
+                ans.add(node.right.data);
+            }
+            else if(node.right==null && node.left!=null){
+                ans.add(node.left.data);
+            }
+            Helper(node.left,ans);
+            Helper(node.right,ans);
+
+
+        }
+        public TreeNode removeLeafNodes(TreeNode root, int target) {
+            if(root==null) return null;
+            root.left=removeLeafNodes(root.left,target);
+            root.right=removeLeafNodes(root.right,target);
+            if(root.val==target && root.left==null && root.right==null) return null;
+            return root;
+        }
+        public boolean evaluateTree(TreeNode root) {
+            if(root.left==null && root.right==null){
+                return root.val==1;
+            }
+            boolean left=evaluateTree(root.left);
+            boolean right=evaluateTree(root.right);
+            return root.val==2 ? left|right : left&right;
+        }
+        public static ArrayList<ArrayList<Integer>> Paths(Node root) {
+            ArrayList<ArrayList<Integer>>ans=new ArrayList<>();
+            ArrayList<Integer>curr=new ArrayList<>();
+            Helper(root,ans,curr);
+            return ans;
+        }
+        private static void Helper(Node root,ArrayList<ArrayList<Integer>>ans,ArrayList<Integer>curr){
+            if(root==null) return;
+            curr.add(root.data);
+            if(root.left== null && root.right==null){//leaf node
+                ans.add(new ArrayList<>(curr));
+            }
+            Helper(root.left,ans,curr);
+            Helper(root.right,ans,curr);
+            curr.remove(curr.size()-1);
+
+        }
+        public ArrayList <Integer> verticalSum(Node root) {
+            TreeMap<Integer,Integer>map=new TreeMap<>();
+            dfs(root,map,0);
+            return new ArrayList<>(map.values());
+        }
+        private void dfs(Node root,TreeMap<Integer,Integer>map,int horizontalDistance){
+            if(root==null){
+                return;
+            }
+            map.put(horizontalDistance,map.getOrDefault(horizontalDistance,0)+root.data);
+            dfs(root.left,map,horizontalDistance-1);
+            dfs(root.right,map,horizontalDistance+1);
+        }
+        public TreeNode buildTreePre(int[] preorder, int[] inorder) {
+            //preorder -> root , left , right
+            //inorder -> left, root , right
+            Map<Integer,Integer>inorderMap=new HashMap<>();
+            for(int i=0;i<inorder.length;i++){
+                inorderMap.put(inorder[i],i);
+            }
+            return buildTreePre(preorder,inorder,0,preorder.length-1,0,inorder.length-1,inorderMap);
+        }
+        private TreeNode buildTreePre(int[] preorder,int[] inorder,int preStart,int preEnd,int inStart,int inEnd,Map<Integer,Integer>inorderMap){
+            if(preStart>preEnd || inStart>inEnd) return null;
+
+            TreeNode root=new TreeNode(preorder[preStart]);
+            int inIndex=inorderMap.get(root.val);
+            int leftEl=inIndex-inStart;
+            root.left=buildTreePre(preorder,inorder,preStart+1,preStart+leftEl,inStart,inIndex-1,inorderMap);
+            root.right=buildTreePre(preorder,inorder,preStart+leftEl+1,preEnd,inIndex+1,inEnd,inorderMap);
+            return root;
+        }
+        public TreeNode buildTreePost(int[] inorder, int[] postorder) {
+            //postorder -> left , right , root
+            //inorder -> left, root , right
+            Map<Integer,Integer>inorderMap=new HashMap<>();
+            for(int i=0;i<inorder.length;i++){
+                inorderMap.put(inorder[i],i);
+            }
+            return buildTreePost(inorder,postorder,0,inorder.length-1,0,postorder.length-1,inorderMap);
+        }
+        private TreeNode buildTreePost(int[] inorder,int[] postorder,int inStart,int inEnd,int postStart,int postEnd,Map<Integer,Integer>inorderMap){
+            if(inStart>inEnd || postStart>postEnd)  return null;
+
+            TreeNode root=new TreeNode(postorder[postEnd]);
+            int inIndex=inorderMap.get(root.val);
+            int leftEl=inIndex-inStart;
+            root.left=buildTreePost(inorder,postorder,inStart,inIndex-1,postStart,postStart+leftEl-1,inorderMap);
+            root.right=buildTreePost(inorder,postorder,inIndex+1,inEnd,postStart+leftEl,postEnd-1,inorderMap);
+            return root;
+        }
         static int ans;
         public static int distributeCandy(Node root)
         {
